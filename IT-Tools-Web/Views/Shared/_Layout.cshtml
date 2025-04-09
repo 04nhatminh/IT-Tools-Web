@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - IT_Tools_Web</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/IT_Tools_Web.styles.css" asp-append-version="true" />
+</head>
+<body>
+    @if (ViewBag.HideLayout != true)
+    {
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">IT - TOOLS - GROUP - 16</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <form class="d-flex ms-auto">
+                    <input class="form-control me-2" type="search" placeholder="Search for tools..." aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <div class="ms-3">
+                    <a asp-area="" asp-controller="Home" asp-action="Login" class="btn btn-outline-danger">Log out</a>
+                </div>
+                <div class="ms-3">
+                    <button class="btn btn-outline-dark">Buy premium</button>
+                </div>
+                <div class="ms-3 d-flex align-items-center gap-2">
+                    <span>Username</span>
+                    <img src="~/images/avatar.png" alt="User Avatar" class="rounded-circle" width="40" height="40">
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    <div class="d-flex">
+        <nav class="bg-light border-end" id="sidebar" style="width: 250px; height: 100vh; padding: 15px;">
+            <ul class="nav flex-column">
+                <li>
+                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#cryptoMenu">
+                        Crypto
+                    </a>
+                    <ul class="collapse list-unstyled ps-3" id="cryptoMenu">
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#converterMenu">
+                        Converter
+                    </a>
+                    <ul class="collapse list-unstyled ps-3" id="converterMenu">
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#webMenu">
+                        Web
+                    </a>
+                    <ul class="collapse list-unstyled ps-3" id="webMenu">
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#imgVidMenu">
+                        Images & Videos
+                    </a>
+                    <ul class="collapse list-unstyled ps-3" id="imgVidMenu">
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#developmentMenu">
+                        Development
+                    </a>
+                    <ul class="collapse list-unstyled ps-3" id="developmentMenu">
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#networkMenu">
+                        Network
+                    </a>
+                    <ul class="collapse list-unstyled ps-3" id="networkMenu">
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#mathMenu">
+                        Math
+                    </a>
+                    <ul class="collapse list-unstyled ps-3" id="mathMenu">
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#measurementMenu">
+                        Measurement
+                    </a>
+                    <ul class="collapse list-unstyled ps-3" id="measurementMenu">
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#textMenu">
+                        Text
+                    </a>
+                    <ul class="collapse list-unstyled ps-3" id="textMenu">
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#dataMenu">
+                        Data
+                    </a>
+                    <ul class="collapse list-unstyled ps-3" id="dataMenu">
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <main class="flex-grow-1 p-4">
+            @RenderBody()
+        </main>
+    </div>
+	}
+	else
+	{
+		@RenderBody()
+	}
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
