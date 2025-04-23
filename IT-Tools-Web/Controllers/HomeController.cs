@@ -46,6 +46,11 @@ namespace IT_Tools_Web.Controllers
             return View();
         }
 
+        public IActionResult MathEvaluator()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
