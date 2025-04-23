@@ -13,7 +13,6 @@
     {
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">IT - TOOLS - GROUP - 16</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -37,8 +36,9 @@
         </div>
     </nav>
     <div class="d-flex">
-        <nav class="bg-light border-end" id="sidebar" style="width: 250px; height: 100vh; padding: 15px;">
-            <ul class="nav flex-column">
+        <nav class="bg-light border-end position-fixed top-0 start-0" id="sidebar" style="width: 250px; height: 100vh; padding: 15px; overflow-y:auto">
+            <a class="navbar-brand text-black fs-6" asp-area="" asp-controller="Home" asp-action="Index">IT - TOOLS - GROUP - 16</a>
+            <ul class="nav flex-column mt-4">
                 <li>
                     <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#cryptoMenu">
                         Crypto
@@ -131,8 +131,8 @@
                 </li>
             </ul>
         </nav>
-        <main class="flex-grow-1 p-4">
-            @RenderBody()
+        <main class="flex-grow-1 p-4" style="margin-left:250px">  
+           @RenderBody()  
         </main>
     </div>
 	}

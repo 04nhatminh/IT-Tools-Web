@@ -4,76 +4,100 @@
 <h1>@ViewData["Title"]</h1>  
 
 <p>Degrees temperature conversions for Kelvin, Celsius, Fahrenheit, Rankine, Delisle, Newton, Réaumur, and Rømer.</p>  
-<div class="col-10">  
-  <div class="input-group mb-3">  
-      <div class="m-2">  
-          <label for="kelvin">Kelvin (K):</label>  
-          <input type="number" class="form-control" id="kelvin" oninput="updateTemperatures('K')" step="0.01">  
-      </div>  
-      <div class="m-2">  
-          <label for="celsius">Celsius (C):</label>  
-          <input type="number" class="form-control" id="celsius" oninput="updateTemperatures('C')" step="0.01">  
-      </div>  
-      <div class="m-2">  
-          <label for="fahrenheit">Fahrenheit (F):</label>  
-          <input type="number" class="form-control" id="fahrenheit" oninput="updateTemperatures('F')" step="0.01">  
-      </div>  
-      <div class="m-2">  
-          <label for="rankine">Rankine (R):</label>  
-          <input type="number" class="form-control" id="rankine" oninput="updateTemperatures('R')" step="0.01">  
-      </div>  
-      <div class="m-2">  
-          <label for="delisle">Delisle (D):</label>  
-          <input type="number" class="form-control" id="delisle" oninput="updateTemperatures('D')" step="0.01">  
-      </div>  
-      <div class="m-2">  
-          <label for="newton">Newton (N):</label>  
-          <input type="number" class="form-control" id="newton" oninput="updateTemperatures('N')" step="0.01">  
-      </div>  
-      <div class="m-2">  
-          <label for="reaumur">Réaumur (Re):</label>  
-          <input type="number" class="form-control" id="reaumur" oninput="updateTemperatures('Re')" step="0.01">  
-      </div>  
-      <div class="m-2">  
-          <label for="romer">Rømer (Ro):</label>  
-          <input type="number" class="form-control" id="romer" oninput="updateTemperatures('Ro')" step="0.01">  
-      </div>  
-  </div>  
-</div>  
+<div class="flex-column col-6">  
+   <div class="m-1">  
+       <label for="kelvin">Kelvin (K):</label>  
+       <input type="number" class="form-control form-control-sm" id="k" oninput="updateTemperatures('K')" step="1">  
+   </div>  
+   <div class="m-1">  
+       <label for="celsius">Celsius (C):</label>  
+       <input type="number" class="form-control form-control-sm" id="c" oninput="updateTemperatures('C')" step="1">  
+   </div>  
+   <div class="m-1">  
+       <label for="fahrenheit">Fahrenheit (F):</label>  
+       <input type="number" class="form-control form-control-sm" id="f" oninput="updateTemperatures('F')" step="1">  
+   </div>  
+   <div class="m-1">  
+       <label for="rankine">Rankine (R):</label>  
+       <input type="number" class="form-control form-control-sm" id="r" oninput="updateTemperatures('R')" step="1">  
+   </div>  
+   <div class="m-1">  
+       <label for="delisle">Delisle (D):</label>  
+       <input type="number" class="form-control form-control-sm" id="d" oninput="updateTemperatures('D')" step="1">  
+   </div>  
+   <div class="m-1">  
+       <label for="newton">Newton (N):</label>  
+       <input type="number" class="form-control form-control-sm" id="n" oninput="updateTemperatures('N')" step="1">  
+   </div>  
+   <div class="m-1">  
+       <label for="reaumur">Réaumur (Re):</label>  
+       <input type="number" class="form-control form-control-sm" id="re" oninput="updateTemperatures('Re')" step="1">  
+   </div>  
+   <div class="m-1">  
+       <label for="romer">Rømer (Ro):</label>  
+       <input type="number" class="form-control form-control-sm" id="ro" oninput="updateTemperatures('Ro')" step="1">  
+   </div>  
+</div>
 
 <script>  
-    function updateTemperatures(fromUnit) {  
-        const kelvinInput = document.getElementById('kelvin');  
-        const celsiusInput = document.getElementById('celsius');  
-        const fahrenheitInput = document.getElementById('fahrenheit');  
-        const rankineInput = document.getElementById('rankine');  
-        const delisleInput = document.getElementById('delisle');  
-        const newtonInput = document.getElementById('newton');  
-        const reaumurInput = document.getElementById('reaumur');  
-        const romerInput = document.getElementById('romer');  
+    function updateTemperatures(unit) {
+        const value = parseFloat(document.getElementById(unit.toLowerCase()).value);
+        console.log(value);
+        if (isNaN(value)) return;
 
-        let value = parseFloat(document.getElementById(fromUnit.toLowerCase()).value);  
-        if (isNaN(value)) return;  
+        let kelvin;
 
-        let kelvin;  
-        switch (fromUnit) {  
-            case 'K': kelvin = value; break;  
-            case 'C': kelvin = value + 273.15; break;  
-            case 'F': kelvin = (value + 459.67) * 5 / 9; break;  
-            case 'R': kelvin = value * 5 / 9; break;  
-            case 'D': kelvin = 373.15 - (value * 2 / 3); break;  
-            case 'N': kelvin = value * 100 / 33 + 273.15; break;  
-            case 'Re': kelvin = value * 5 / 4 + 273.15; break;  
-            case 'Ro': kelvin = (value - 7.5) * 40 / 21 + 273.15; break;  
-        }  
+        switch (unit) {
+            case 'K':
+                kelvin = value;
+                break;
+            case 'C':
+                kelvin = value + 273.15;
+                break;
+            case 'F':
+                kelvin = (value + 459.67) * 5 / 9;
+                break;
+            case 'R':
+                kelvin = value * 5 / 9;
+                break;
+            case 'D':
+                kelvin = 373.15 - value * 2 / 3;
+                break;
+            case 'N':
+                kelvin = value * 100 / 33 + 273.15;
+                break;
+            case 'Re':
+                kelvin = value * 5 / 4 + 273.15;
+                break;
+            case 'Ro':
+                kelvin = (value - 7.5) * 40 / 21 + 273.15;
+                break;
+            default:
+                return;
+        }
 
-        kelvinInput.value = kelvin.toFixed(2);  
-        celsiusInput.value = (kelvin - 273.15).toFixed(2);  
-        fahrenheitInput.value = (kelvin * 9 / 5 - 459.67).toFixed(2);  
-        rankineInput.value = (kelvin * 9 / 5).toFixed(2);  
-        delisleInput.value = ((373.15 - kelvin) * 3 / 2).toFixed(2);  
-        newtonInput.value = ((kelvin - 273.15) * 33 / 100).toFixed(2);  
-        reaumurInput.value = ((kelvin - 273.15) * 4 / 5).toFixed(2);  
-        romerInput.value = ((kelvin - 273.15) * 21 / 40 + 7.5).toFixed(2);  
-    }  
+        const conversions = {
+            k: kelvin,
+            c: kelvin - 273.15,
+            f: kelvin * 9 / 5 - 459.67,
+            r: kelvin * 9 / 5,
+            d: (373.15 - kelvin) * 3 / 2,
+            n: (kelvin - 273.15) * 33 / 100,
+            re: (kelvin - 273.15) * 4 / 5,
+            ro: (kelvin - 273.15) * 21 / 40 + 7.5
+        };
+
+        for (const [id, val] of Object.entries(conversions)) {
+            const input = document.getElementById(id);
+            if (id.toLowerCase() !== unit.toLowerCase()) {
+                input.value = Math.round(val * 100) / 100;
+            }
+        }
+    }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const kelvinInput = document.getElementById("k");
+            kelvinInput.value = 0;
+            updateTemperatures("K");
+        });
 </script>  
