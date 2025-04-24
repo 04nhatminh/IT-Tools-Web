@@ -40,13 +40,15 @@ namespace IT_Tools_Web.Controllers
         {
             return View();
         }
-
         public IActionResult TemperatureConverter()
         {
             return View();
         }
-
         public IActionResult MathEvaluator()
+        {
+            return View();
+        }
+        public IActionResult PercentageCalculator()
         {
             return View();
         }
