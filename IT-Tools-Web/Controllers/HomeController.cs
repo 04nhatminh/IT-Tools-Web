@@ -64,6 +64,10 @@ namespace IT_Tools_Web.Controllers
         {
             return View();
         }
+        public IActionResult TextToNATOAlphabet()
+        {
+            return View();
+        }
         public IActionResult Chronometer()
         {
             return View();
