@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using IT_Tools_Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace IT_Tools_Web.Controllers
 {
@@ -62,6 +63,15 @@ namespace IT_Tools_Web.Controllers
         }
 
         public IActionResult RomanNumeralConverter()
+        {
+            return View();
+        }
+
+        public IActionResult EncodeDecodeURL()
+        {
+            return View();
+        }
+        public IActionResult EscapeHTML()
         {
             return View();
         }
