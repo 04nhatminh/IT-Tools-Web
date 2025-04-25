@@ -1,4 +1,5 @@
-using IT_Tools_Web.Data;
+using IT_Tools_Web.Business.Services;
+using IT_Tools_Web.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
+builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<ToolService>();
 
 var app = builder.Build();
 

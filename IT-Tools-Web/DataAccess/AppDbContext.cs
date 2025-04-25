@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using IT_Tools_Web.Models;
+using IT_Tools_Web.DataAccess.Models;
 
-namespace IT_Tools_Web.Data
+namespace IT_Tools_Web.DataAccess
 {
     public class AppDbContext : DbContext
     {

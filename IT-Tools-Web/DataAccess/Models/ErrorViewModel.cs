@@ -1,4 +1,4 @@
-namespace IT_Tools_Web.Models
+namespace IT_Tools_Web.DataAccess.Models
 {
     public class ErrorViewModel
     {

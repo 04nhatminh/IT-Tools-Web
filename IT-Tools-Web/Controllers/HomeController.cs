@@ -1,12 +1,12 @@
 using System;
 using System.Diagnostics;
 using System.Net;
-using IT_Tools_Web.Data;
 using System.Security.Cryptography;
 using System.Text;
-using IT_Tools_Web.Models;
+using IT_Tools_Web.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using static System.Formats.Asn1.AsnWriter;
+using IT_Tools_Web.DataAccess;
 
 namespace IT_Tools_Web.Controllers
 {
