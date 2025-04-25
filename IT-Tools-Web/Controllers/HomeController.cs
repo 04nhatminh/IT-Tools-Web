@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Net;
+using IT_Tools_Web.Data;
 using IT_Tools_Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,11 +9,29 @@ namespace IT_Tools_Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        // Test database
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly AppDbContext _context;
+
+        public HomeController(AppDbContext context)
         {
-            _logger = logger;
+            _context = context;
+        }
+
+        public IActionResult TestDb()
+        {
+            var account = new Account
+            {
+                Username = "tester",
+                Email = "tester@example.com",
+                Password = "123456",
+                Type = "user"
+            };
+
+            _context.Accounts.Add(account);
+            _context.SaveChanges();
+
+            return Content("Data inserted successfully!");
         }
 
         public IActionResult Login()
