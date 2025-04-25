@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.Net;
 using IT_Tools_Web.Models;
@@ -66,6 +67,10 @@ namespace IT_Tools_Web.Controllers
             return View();
         }
         public IActionResult IPv4Converter()
+        {
+            return View();
+        }
+        public IActionResult IPv4RangeExpander()
         {
             return View();
         }
