@@ -1,0 +1,69 @@
+﻿x
+    <div class="mb-3">
+        <label for="basic-username" class="form-label">Username</label>
+        <input type="text" class="form-control" id="basic-username" placeholder="Your username...">
+    </div>
+
+    <div class="mb-3">
+        <label for="basic-password" class="form-label">Password</label>
+        <div class=" position-relative">
+            <input type="password" class="form-control pe-5" id="basic-password" placeholder="Your password...">
+            <i class="bi bi-eye-slash position-absolute top-50 end-0 translate-middle-y me-3 text-muted"
+               style="cursor: pointer;"
+               onclick="togglePassword(this)"
+               title="Show password"></i>
+        </div>
+        
+    </div>
+
+
+    <div class="mb-3">
+        <label class="form-label">Authorization header:</label>
+        <textarea id="basic-auth-output" class="form-control" rows="2" readonly style="resize: none; overflow: auto;">Authorization: Basic </textarea>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-outline-secondary" onclick="copyText('basic-auth-output', this)" title="Copy to clipboard">Copy header</button>
+    </div>
+</div>
+
+<script>
+    function updateAuthHeader() {
+        const username = document.getElementById('basic-username').value;
+        const password = document.getElementById('basic-password').value;
+        const auth = btoa(`${username}:${password}`);
+        document.getElementById('basic-auth-output').value = `Authorization: Basic ${auth}`;
+    }
+
+    document.getElementById('basic-username').addEventListener('input', updateAuthHeader);
+    document.getElementById('basic-password').addEventListener('input', updateAuthHeader);
+
+    function copyText(id, icon) {
+        const input = document.getElementById(id);
+        navigator.clipboard.writeText(input.value).then(() => {
+            icon.setAttribute("title", "Copied!");
+            const tooltip = new bootstrap.Tooltip(icon);
+            tooltip.show();
+
+            setTimeout(() => {
+                icon.setAttribute("title", "Copy to clipboard");
+                tooltip.dispose();
+            }, 1500);
+        });
+    }
+    function togglePassword(icon) {
+        const input = document.getElementById("basic-password");
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("bi-eye-slash");
+            icon.classList.add("bi-eye");
+            icon.setAttribute("title", "Hide password");
+        } else {
+            input.type = "password";
+            icon.classList.remove("bi-eye");
+            icon.classList.add("bi-eye-slash");
+            icon.setAttribute("title", "Show password");
+        }
+    }
+</script>

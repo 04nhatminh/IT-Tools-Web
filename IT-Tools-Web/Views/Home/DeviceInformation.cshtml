@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Device information";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>Get information about your current device (screen size, pixel-ratio, user agent, ...)</p>
+<div class="container my-4">
+    <!-- Screen Section -->
+    <div class="border rounded bg-light p-4 mb-4">
+        <h5 class="mb-3">Screen</h5>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <strong>Screen size:</strong> <span id="screen-size"></span>
+            </div>
+            <div class="col-md-6">
+                <strong>Window size:</strong> <span id="window-size"></span>
+            </div>
+            <div class="col-md-6">
+                <strong>Orientation:</strong> <span id="orientation"></span>
+            </div>
+            <div class="col-md-6">
+                <strong>Orientation angle:</strong> <span id="orientation-angle"></span>
+            </div>
+            <div class="col-md-6">
+                <strong>Color depth:</strong> <span id="color-depth"></span>
+            </div>
+            <div class="col-md-6">
+                <strong>Pixel ratio:</strong> <span id="pixel-ratio"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Device Section -->
+    <div class="border rounded bg-light p-4">
+        <h5 class="mb-3">Device</h5>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <strong>Browser vendor:</strong> <span id="vendor"></span>
+            </div>
+            <div class="col-md-6">
+                <strong>Languages:</strong> <span id="languages"></span>
+            </div>
+            <div class="col-md-6">
+                <strong>Platform:</strong> <span id="platform"></span>
+            </div>
+            <div class="col-md-6">
+                <strong>User agent:</strong>
+                <div class="small text-break" id="user-agent"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function populateDeviceInfo() {
+        // Screen Info
+        document.getElementById('screen-size').textContent = `${screen.width} x ${screen.height}`;
+        document.getElementById('window-size').textContent = `${window.innerWidth} x ${window.innerHeight}`;
+        document.getElementById('orientation').textContent = screen.orientation?.type || "N/A";
+        document.getElementById('orientation-angle').textContent = `${screen.orientation?.angle || 0}°`;
+        document.getElementById('color-depth').textContent = `${screen.colorDepth} bits`;
+        document.getElementById('pixel-ratio').textContent = `${window.devicePixelRatio} dppx`;
+
+        // Device Info
+        document.getElementById('vendor').textContent = navigator.vendor;
+        document.getElementById('languages').textContent = navigator.languages.join(", ");
+        document.getElementById('platform').textContent = navigator.platform;
+        document.getElementById('user-agent').textContent = navigator.userAgent;
+    }
+
+    populateDeviceInfo();
+    window.addEventListener('resize', populateDeviceInfo);
+    screen.orientation?.addEventListener('change', populateDeviceInfo);
+</script>

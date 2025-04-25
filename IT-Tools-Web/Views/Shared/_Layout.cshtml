@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/IT_Tools_Web.styles.css" asp-append-version="true" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
     @if (ViewBag.HideLayout != true)
@@ -46,6 +47,8 @@
                     <ul class="collapse list-unstyled ps-3" id="cryptoMenu">
                         <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
                         <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Bcrypt">Bcrypt</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="ULIDGenerator">ULID generator</a></li>
                     </ul>
                 </li>
                 <li>
@@ -53,8 +56,8 @@
                         Converter
                     </a>
                     <ul class="collapse list-unstyled ps-3" id="converterMenu">
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="IntegerBaseConverter">Integer base converter</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="RomanNumeralConverter">Roman numeral converter</a></li>
                     </ul>
                 </li>
                 <li>
@@ -62,8 +65,11 @@
                         Web
                     </a>
                     <ul class="collapse list-unstyled ps-3" id="webMenu">
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="EncodeDecodeURL">Encode/decode URL-formatted strings</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="EscapeHTML">Escape HTML entities</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="DeviceInformation">Device information</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="BasicAuthGenerator">Basic auth generator</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="SlugifyString">Slugify string</a></li>
                     </ul>
                 </li>
                 <li>
@@ -71,8 +77,8 @@
                         Images & Videos
                     </a>
                     <ul class="collapse list-unstyled ps-3" id="imgVidMenu">
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="QRCodeGenerator">QR Code Generator</a></li>
+
                     </ul>
                 </li>
                 <li>
@@ -80,8 +86,9 @@
                         Development
                     </a>
                     <ul class="collapse list-unstyled ps-3" id="developmentMenu">
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="GitCheatsheet">Git cheatsheet</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="RandomPortGenerator">Random port generator</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="RegexCheatsheet">Regex cheatsheet</a></li>
                     </ul>
                 </li>
                 <li>
