@@ -56,7 +56,10 @@ namespace IT_Tools_Web.Controllers
         {
             return View();
         }
-
+        public IActionResult ColorConverter()
+        {
+            return View();
+        }
         public IActionResult Chronometer()
         {
             return View();
@@ -93,10 +96,7 @@ namespace IT_Tools_Web.Controllers
         {
             return View();
         }
-        public IActionResult IPv4SubnetCalculator()
-        {
-            return View();
-        }
+
         public IActionResult EmojiPicker()
         {
             return View();
