@@ -14,7 +14,6 @@
     {
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">IT - TOOLS - GROUP - 16</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -38,8 +37,9 @@
         </div>
     </nav>
     <div class="d-flex">
-        <nav class="bg-light border-end" id="sidebar" style="width: 250px; height: 100vh; padding: 15px;">
-            <ul class="nav flex-column">
+        <nav class="bg-light border-end position-fixed top-0 start-0" id="sidebar" style="width: 250px; height: 100vh; padding: 15px; overflow-y:auto">
+            <a class="navbar-brand text-black fs-6" asp-area="" asp-controller="Home" asp-action="Index">IT - TOOLS - GROUP - 16</a>
+            <ul class="nav flex-column mt-4">
                 <li>
                     <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#cryptoMenu">
                         Crypto
@@ -56,8 +56,11 @@
                         Converter
                     </a>
                     <ul class="collapse list-unstyled ps-3" id="converterMenu">
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="ColorConverter">Color converter</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="CaseConverter">Case converter</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TextToNATOAlphabet">Text to NATO alphabet</a></li>
                         <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="IntegerBaseConverter">Integer base converter</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="RomanNumeralConverter">Roman numeral converter</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="RomanNumeralConverter">Roman numeral converter</a></li>
                     </ul>
                 </li>
                 <li>
@@ -78,7 +81,6 @@
                     </a>
                     <ul class="collapse list-unstyled ps-3" id="imgVidMenu">
                             <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="QRCodeGenerator">QR Code Generator</a></li>
-
                     </ul>
                 </li>
                 <li>
@@ -96,8 +98,8 @@
                         Network
                     </a>
                     <ul class="collapse list-unstyled ps-3" id="networkMenu">
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="IPv4Converter">IPv4 address converter</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="IPv4RangeExpander">IPv4 range expander</a></li>
                     </ul>
                 </li>
                 <li>
@@ -105,8 +107,8 @@
                         Math
                     </a>
                     <ul class="collapse list-unstyled ps-3" id="mathMenu">
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="MathEvaluator">Math evaluator</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="PercentageCalculator">Percentage calculator</a></li>
                     </ul>
                 </li>
                 <li>
@@ -114,8 +116,8 @@
                         Measurement
                     </a>
                     <ul class="collapse list-unstyled ps-3" id="measurementMenu">
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Chronometer">Chronometer</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TemperatureConverter">Temperature converter</a></li>
                     </ul>
                 </li>
                 <li>
@@ -123,8 +125,10 @@
                         Text
                     </a>
                     <ul class="collapse list-unstyled ps-3" id="textMenu">
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="LoremIpsumGenerator">Lorem ipsum generator</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TextStatistics">Text statistics</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="StringObfuscator">String obfuscator</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="EmojiPicker">Emoji picker</a></li>
                     </ul>
                 </li>
                 <li>
@@ -132,14 +136,13 @@
                         Data
                     </a>
                     <ul class="collapse list-unstyled ps-3" id="dataMenu">
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="PhoneParserAndFormatter">Phone parser and formatter</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
-        <main class="flex-grow-1 p-4">
-            @RenderBody()
+        <main class="flex-grow-1 p-4" style="margin-left:250px">  
+           @RenderBody()  
         </main>
     </div>
 	}

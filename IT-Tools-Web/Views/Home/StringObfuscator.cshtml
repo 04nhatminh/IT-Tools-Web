@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "String obfuscator";
+}
+<h1>@ViewData["Title"]</h1>
+<p>Obfuscate a string (like a secret, an IBAN, or a token) to make it shareable and identifiable without revealing its content.</p>
+<div class="mb-3 col-8">
+    <label for="inputString" class="form-label">String to obfuscate:</label>
+    <textarea class="form-control" id="inputString" rows="3" placeholder="Enter string to obfuscate"></textarea>
+</div>
+
+<div class="row g-3 align-items-end">
+    <div class="col-auto">
+        <label class="form-label">Keep first:</label>
+        <input type="number" id="keepFirst" class="form-control mx-1" value="4" min="0">
+    </div>
+
+    <div class="col-auto">
+        <label class="form-label">Keep last:</label>
+        <input type="number" id="keepLast" class="form-control mx-1" value="4" min="0">
+    </div>
+
+    <div class="col-auto">
+        <label class="form-label d-block">Keep spaces:</label>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="keepSpaces" checked>
+        </div>
+    </div>
+</div>
+
+<div class="col-8 p-3 m-1 bg-secondary bg-opacity-10 mt-3" id="result-container" hidden>
+    <p class="mb-0" id="result">123</p>
+</div>
+
+<script>
+    function updateResult() {
+        const inputString = document.getElementById('inputString').value.trim();
+        const keepFirst = parseInt(document.getElementById('keepFirst').value) || 0;
+        const keepLast = parseInt(document.getElementById('keepLast').value) || 0;
+        const keepSpaces = document.getElementById('keepSpaces').checked;
+        const resultContainer = document.getElementById('result-container');
+
+        function obfuscateString(str, keepFirst, keepLast, keepSpaces) {
+            const regex = keepSpaces ? /[^\s]/g : /./g;
+            const obfuscated = str
+                .split('')
+                .map((char, index) => {
+                    if (index < keepFirst || index >= str.length - keepLast) {
+                        return char;
+                    }
+                    return char.match(regex) ? '*' : char;
+                })
+                .join('');
+            return obfuscated;
+        }
+
+        if (inputString) {
+            const result = obfuscateString(inputString, keepFirst, keepLast, keepSpaces);
+            document.getElementById('result').textContent = result;
+            resultContainer.hidden = false;
+        } else {
+            resultContainer.hidden = true;
+        }
+    }
+
+    document.getElementById('inputString').addEventListener('input', updateResult);
+    document.getElementById('keepFirst').addEventListener('input', updateResult);
+    document.getElementById('keepLast').addEventListener('input', updateResult);
+    document.getElementById('keepSpaces').addEventListener('change', updateResult);
+</script>

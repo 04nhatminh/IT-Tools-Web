@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Percentage Calculator";
+}
+<h1>@ViewData["Title"]</h1>
+<p>Easily calculate percentages from a value to another value, or from a percentage to a value.</p>
+<div class="flex-column">
+    <div class="col-8 d-flex bg-secondary bg-opacity-10 p-3 justify-content-center align-items-center">
+       <p class="mb-0">What is</p>
+       <input type="number" class="form-control mx-2 w-25" id="value11" placeholder="Value 1">
+       <p class="mb-0">% of</p>
+       <input type="number" class="form-control mx-2 w-25" id="value12" placeholder="Value 2">
+       <input type="number" class="form-control w-25" id="result1" placeholder="Result" readonly>
+    </div>
+    <div class="col-8 d-flex bg-secondary bg-opacity-10 p-3 my-4 justify-content-center align-items-center">
+        <input type="number" class="form-control mx-2 w-25" id="value21" placeholder="Value 1">
+        <p class="mb-0">is what percent of</p>
+        <input type="number" class="form-control mx-2 w-25" id="value22" placeholder="Value 2">
+        <input type="number" class="form-control w-25" id="result2" placeholder="Result" readonly>
+    </div>
+    <div class="flex-column col-8 bg-secondary bg-opacity-10 p-3">
+        <p>What is the percentage increase/decrease</p>
+        <div class="w-100 d-flex justify-content-center align-items-center">
+            <input type="number" class="form-control mx-2 w-50" id="from" placeholder="From">
+            <input type="number" class="form-control mx-2 w-50" id="to" placeholder="To">
+            <input type="number" class="form-control w-25" id="result3" placeholder="Result" readonly>
+        </div>
+    </div>
+</div>
+
+<script>  
+   // Calculate "What is X% of Y"  
+   document.getElementById("value11").addEventListener("input", calculatePercentage);  
+   document.getElementById("value12").addEventListener("input", calculatePercentage);  
+
+   function calculatePercentage() {  
+       const value1 = parseFloat(document.getElementById("value11").value);  
+       const value2 = parseFloat(document.getElementById("value12").value);  
+       const result = document.getElementById("result1");  
+
+       if (!isNaN(value1) && !isNaN(value2)) {  
+           result.value = (value1 / 100) * value2;  
+       } else {  
+           result.value = "";  
+       }  
+   }  
+
+   // Calculate "X is what percent of Y"  
+   document.getElementById("value21").addEventListener("input", calculateWhatPercent);  
+   document.getElementById("value22").addEventListener("input", calculateWhatPercent);  
+
+   function calculateWhatPercent() {  
+       const value1 = parseFloat(document.getElementById("value21").value);  
+       const value2 = parseFloat(document.getElementById("value22").value);  
+       const result = document.getElementById("result2");  
+
+       if (!isNaN(value1) && !isNaN(value2) && value2 !== 0) {  
+           result.value = (value1 / value2) * 100;  
+       } else {  
+           result.value = "";  
+       }  
+   }  
+
+   // Calculate "Percentage increase/decrease from X to Y"  
+   document.getElementById("from").addEventListener("input", calculatePercentageChange);  
+   document.getElementById("to").addEventListener("input", calculatePercentageChange);  
+
+   function calculatePercentageChange() {  
+       const from = parseFloat(document.getElementById("from").value);  
+       const to = parseFloat(document.getElementById("to").value);  
+       const result = document.getElementById("result3");  
+
+       if (!isNaN(from) && !isNaN(to) && from !== 0) {  
+           result.value = ((to - from) / from) * 100;  
+       } else {  
+           result.value = "";  
+       }  
+   }  
+</script>

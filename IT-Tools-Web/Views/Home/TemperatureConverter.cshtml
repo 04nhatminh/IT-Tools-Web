@@ -1,0 +1,103 @@
+﻿@{  
+  ViewData["Title"] = "Temperature Converter";  
+}  
+<h1>@ViewData["Title"]</h1>  
+
+<p>Degrees temperature conversions for Kelvin, Celsius, Fahrenheit, Rankine, Delisle, Newton, Réaumur, and Rømer.</p>  
+<div class="flex-column col-6">  
+   <div class="m-1">  
+       <label for="kelvin">Kelvin (K):</label>  
+       <input type="number" class="form-control form-control-sm" id="k" oninput="updateTemperatures('K')" step="1">  
+   </div>  
+   <div class="m-1">  
+       <label for="celsius">Celsius (C):</label>  
+       <input type="number" class="form-control form-control-sm" id="c" oninput="updateTemperatures('C')" step="1">  
+   </div>  
+   <div class="m-1">  
+       <label for="fahrenheit">Fahrenheit (F):</label>  
+       <input type="number" class="form-control form-control-sm" id="f" oninput="updateTemperatures('F')" step="1">  
+   </div>  
+   <div class="m-1">  
+       <label for="rankine">Rankine (R):</label>  
+       <input type="number" class="form-control form-control-sm" id="r" oninput="updateTemperatures('R')" step="1">  
+   </div>  
+   <div class="m-1">  
+       <label for="delisle">Delisle (D):</label>  
+       <input type="number" class="form-control form-control-sm" id="d" oninput="updateTemperatures('D')" step="1">  
+   </div>  
+   <div class="m-1">  
+       <label for="newton">Newton (N):</label>  
+       <input type="number" class="form-control form-control-sm" id="n" oninput="updateTemperatures('N')" step="1">  
+   </div>  
+   <div class="m-1">  
+       <label for="reaumur">Réaumur (Re):</label>  
+       <input type="number" class="form-control form-control-sm" id="re" oninput="updateTemperatures('Re')" step="1">  
+   </div>  
+   <div class="m-1">  
+       <label for="romer">Rømer (Ro):</label>  
+       <input type="number" class="form-control form-control-sm" id="ro" oninput="updateTemperatures('Ro')" step="1">  
+   </div>  
+</div>
+
+<script>  
+    function updateTemperatures(unit) {
+        const value = parseFloat(document.getElementById(unit.toLowerCase()).value);
+        console.log(value);
+        if (isNaN(value)) return;
+
+        let kelvin;
+
+        switch (unit) {
+            case 'K':
+                kelvin = value;
+                break;
+            case 'C':
+                kelvin = value + 273.15;
+                break;
+            case 'F':
+                kelvin = (value + 459.67) * 5 / 9;
+                break;
+            case 'R':
+                kelvin = value * 5 / 9;
+                break;
+            case 'D':
+                kelvin = 373.15 - value * 2 / 3;
+                break;
+            case 'N':
+                kelvin = value * 100 / 33 + 273.15;
+                break;
+            case 'Re':
+                kelvin = value * 5 / 4 + 273.15;
+                break;
+            case 'Ro':
+                kelvin = (value - 7.5) * 40 / 21 + 273.15;
+                break;
+            default:
+                return;
+        }
+
+        const conversions = {
+            k: kelvin,
+            c: kelvin - 273.15,
+            f: kelvin * 9 / 5 - 459.67,
+            r: kelvin * 9 / 5,
+            d: (373.15 - kelvin) * 3 / 2,
+            n: (kelvin - 273.15) * 33 / 100,
+            re: (kelvin - 273.15) * 4 / 5,
+            ro: (kelvin - 273.15) * 21 / 40 + 7.5
+        };
+
+        for (const [id, val] of Object.entries(conversions)) {
+            const input = document.getElementById(id);
+            if (id.toLowerCase() !== unit.toLowerCase()) {
+                input.value = Math.round(val * 100) / 100;
+            }
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const kelvinInput = document.getElementById("k");
+        kelvinInput.value = 0;
+        updateTemperatures("K");
+    });
+</script>  

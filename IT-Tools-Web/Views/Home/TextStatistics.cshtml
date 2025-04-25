@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Text statistics";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Get information about a text, the number of characters, the number of words, its size in bytes, ...</p>
+<div class="col-8">
+    <textarea id="yourText" class="form-control m-3 w-75" rows="6"></textarea>
+    <div class="d-flex">
+        <div class="flex-column p-3">
+            <p class="opacity-50">Character count</p>
+            <h4>0</h4>
+        </div>
+        <div class="flex-column p-3">
+            <p class="opacity-50">Word count</p>
+            <h4>0</h4>
+        </div>
+        <div class="flex-column p-3">
+            <p class="opacity-50">Line count</p>
+            <h4>0</h4>
+        </div>
+        <div class="flex-column p-3">
+            <p class="opacity-50">Byte size</p>
+            <h4>0 Bytes</h4>
+        </div>
+    </div>
+
+</div>
+
+<script>
+        document.getElementById('yourText').addEventListener('input', function () {
+        const text = this.value;
+
+        const charCount = text.length;
+
+        const wordCount = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+
+        const lineCount = text === "" ? 0 : text.split(/\r\n|\r|\n/).length;
+
+        const byteSize = new Blob([text]).size;
+
+        document.querySelectorAll('.flex-column h4')[0].textContent = charCount;
+        document.querySelectorAll('.flex-column h4')[1].textContent = wordCount;
+        document.querySelectorAll('.flex-column h4')[2].textContent = lineCount;
+        document.querySelectorAll('.flex-column h4')[3].textContent = `${byteSize} Bytes`;
+    });
+</script>

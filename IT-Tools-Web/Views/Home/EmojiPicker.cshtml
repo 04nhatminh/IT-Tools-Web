@@ -1,0 +1,648 @@
+﻿@{
+    ViewData["Title"] = "Emoji Picker";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Copy and paste emojis easily and get the unicode and code points value of each emoji.</p>
+
+<div class="container py-4">
+
+    <input type="text" class="form-control mb-4" placeholder="Search emojis (e.g. 'smile')">
+
+    <div class="accordion" id="emojiAccordion">
+
+        <!-- Smileys & Emotion -->
+               <div class="accordion-item">
+                   <h2 class="accordion-header" id="headingOne">
+                       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                           😄 Smileys & Emotion
+                       </button>
+                   </h2>
+                   <div id="collapseOne" class="accordion-collapse collapse show">
+                       <div class="accordion-body">
+                           <div class="row g-3">
+                               <div class="col-md-3">
+                                   <div class="card emoji-card p-3" data-name="Grinning Face">
+                                       <div class="d-flex align-items-center">
+                                           <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">😀</div>
+                                           <div>
+                                               <div class="fw-bold">Grinning Face</div>
+                                               <small>U+1F600</small>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col-md-3">
+                                   <div class="card emoji-card p-3" data-name="Beaming Face with Smiling Eyes">
+                                       <div class="d-flex align-items-center">
+                                           <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">😁</div>
+                                           <div>
+                                               <div class="fw-bold">Beaming Face with Smiling Eyes</div>
+                                               <small>U+1F601</small>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col-md-3">
+                                   <div class="card emoji-card p-3" data-name="Face with Tears of Joy">
+                                       <div class="d-flex align-items-center">
+                                           <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">😂</div>
+                                           <div>
+                                               <div class="fw-bold">Face with Tears of Joy</div>
+                                               <small>U+1F602</small>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col-md-3">
+                                   <div class="card emoji-card p-3" data-name="Rolling on the Floor Laughing">
+                                       <div class="d-flex align-items-center">
+                                           <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🤣</div>
+                                           <div>
+                                               <div class="fw-bold">Rolling on the Floor Laughing</div>
+                                               <small>U+1F923</small>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col-md-3">
+                                   <div class="card emoji-card p-3" data-name="Grinning Face with Big Eyes">
+                                       <div class="d-flex align-items-center">
+                                           <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">😃</div>
+                                           <div>
+                                               <div class="fw-bold">Grinning Face with Big Eyes</div>
+                                               <small>U+1F603</small>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col-md-3">
+                                   <div class="card emoji-card p-3" data-name="Grinning Face with Smiling Eyes">
+                                       <div class="d-flex align-items-center">
+                                           <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">😄</div>
+                                           <div>
+                                               <div class="fw-bold">Grinning Face with Smiling Eyes</div>
+                                               <small>U+1F604</small>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col-md-3">
+                                   <div class="card emoji-card p-3" data-name="Grinning Face with Sweat">
+                                       <div class="d-flex align-items-center">
+                                           <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">😅</div>
+                                           <div>
+                                               <div class="fw-bold">Grinning Face with Sweat</div>
+                                               <small>U+1F605</small>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col-md-3">
+                                   <div class="card emoji-card p-3" data-name="Grinning Squinting Face">
+                                       <div class="d-flex align-items-center">
+                                           <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">😆</div>
+                                           <div>
+                                               <div class="fw-bold">Grinning Squinting Face</div>
+                                               <small>U+1F606</small>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col-md-3">
+                                   <div class="card emoji-card p-3" data-name="Winking Face">
+                                       <div class="d-flex align-items-center">
+                                           <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">😉</div>
+                                           <div>
+                                               <div class="fw-bold">Winking Face</div>
+                                               <small>U+1F609</small>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col-md-3">
+                                   <div class="card emoji-card p-3" data-name="Smiling Face with Smiling Eyes">
+                                       <div class="d-flex align-items-center">
+                                           <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">😊</div>
+                                           <div>
+                                               <div class="fw-bold">Smiling Face with Smiling Eyes</div>
+                                               <small>U+1F60A</small>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col-md-3">
+                                   <div class="card emoji-card p-3" data-name="Face Savoring Food">
+                                       <div class="d-flex align-items-center">
+                                           <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">😋</div>
+                                           <div>
+                                               <div class="fw-bold">Face Savoring Food</div>
+                                               <small>U+1F60B</small>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col-md-3">
+                                   <div class="card emoji-card p-3" data-name="Smiling Face with Sunglasses">
+                                       <div class="d-flex align-items-center">
+                                           <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">😎</div>
+                                           <div>
+                                               <div class="fw-bold">Smiling Face with Sunglasses</div>
+                                               <small>U+1F60E</small>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+        <!-- Animals & Nature -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                    🐶 Animals & Nature
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Cat Face">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🐱</div>
+                                    <div>
+                                        <div class="fw-bold">Cat Face</div>
+                                        <small>U+1F431</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Dog Face">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🐶</div>
+                                    <div>
+                                        <div class="fw-bold">Dog Face</div>
+                                        <small>U+1F436</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Fox Face">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🦊</div>
+                                    <div>
+                                        <div class="fw-bold">Fox Face</div>
+                                        <small>U+1F98A</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Panda Face">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🐼</div>
+                                    <div>
+                                        <div class="fw-bold">Panda Face</div>
+                                        <small>U+1F43C</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Koala">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🐨</div>
+                                    <div>
+                                        <div class="fw-bold">Koala</div>
+                                        <small>U+1F428</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Tiger Face">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🐯</div>
+                                    <div>
+                                        <div class="fw-bold">Tiger Face</div>
+                                        <small>U+1F42F</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Rabbit Face">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🐰</div>
+                                    <div>
+                                        <div class="fw-bold">Rabbit Face</div>
+                                        <small>U+1F430</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Unicorn Face">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🦄</div>
+                                    <div>
+                                        <div class="fw-bold">Unicorn Face</div>
+                                        <small>U+1F984</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Hibiscus">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🌺</div>
+                                    <div>
+                                        <div class="fw-bold">Hibiscus</div>
+                                        <small>U+1F33A</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Sunflower">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🌻</div>
+                                    <div>
+                                        <div class="fw-bold">Sunflower</div>
+                                        <small>U+1F33B</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Cactus">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🌵</div>
+                                    <div>
+                                        <div class="fw-bold">Cactus</div>
+                                        <small>U+1F335</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Food & Drink -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFood">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFood">
+                    🍔 Food & Drink
+                </button>
+            </h2>
+            <div id="collapseFood" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Hamburger">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🍔</div>
+                                    <div>
+                                        <div class="fw-bold">Hamburger</div>
+                                        <small>U+1F354</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Pizza">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🍕</div>
+                                    <div>
+                                        <div class="fw-bold">Pizza</div>
+                                        <small>U+1F355</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Taco">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🌮</div>
+                                    <div>
+                                        <div class="fw-bold">Taco</div>
+                                        <small>U+1F32E</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Ice Cream">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🍨</div>
+                                    <div>
+                                        <div class="fw-bold">Ice Cream</div>
+                                        <small>U+1F368</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Cup of Coffee">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">☕</div>
+                                    <div>
+                                        <div class="fw-bold">Cup of Coffee</div>
+                                        <small>U+2615</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Boba">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🧋</div>
+                                    <div>
+                                        <div class="fw-bold">Bubble Tea</div>
+                                        <small>U+1F9CB</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activities -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingActivities">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseActivities">
+                    ⚽ Activities
+                </button>
+            </h2>
+            <div id="collapseActivities" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Soccer Ball">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">⚽</div>
+                                    <div><div class="fw-bold">Soccer Ball</div><small>U+26BD</small></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Basketball">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🏀</div>
+                                    <div><div class="fw-bold">Basketball</div><small>U+1F3C0</small></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Fishing Pole">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🎣</div>
+                                    <div><div class="fw-bold">Fishing Pole</div><small>U+1F3A3</small></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Game Controller">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🎮</div>
+                                    <div><div class="fw-bold">Game Controller</div><small>U+1F3AE</small></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Travel & Places -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTravel">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTravel">
+                    🌍 Travel & Places
+                </button>
+            </h2>
+            <div id="collapseTravel" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Globe">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🌍</div>
+                                    <div><div class="fw-bold">Globe</div><small>U+1F30D</small></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Tokyo Tower">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🗼</div>
+                                    <div><div class="fw-bold">Tokyo Tower</div><small>U+1F5FC</small></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Statue of Liberty">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🗽</div>
+                                    <div><div class="fw-bold">Statue of Liberty</div><small>U+1F5FD</small></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Airplane">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">✈️</div>
+                                    <div><div class="fw-bold">Airplane</div><small>U+2708</small></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Desert Island">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🏝️</div>
+                                    <div><div class="fw-bold">Desert Island</div><small>U+1F3DD</small></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Objects -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingObjects">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseObjects">
+                    💡 Objects
+                </button>
+            </h2>
+            <div id="collapseObjects" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Light Bulb">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">💡</div>
+                                    <div><div class="fw-bold">Light Bulb</div><small>U+1F4A1</small></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Laptop">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">💻</div>
+                                    <div><div class="fw-bold">Laptop</div><small>U+1F4BB</small></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Mobile Phone">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">📱</div>
+                                    <div><div class="fw-bold">Mobile Phone</div><small>U+1F4F1</small></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flags -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFlags">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFlags">
+                    🏳️ Flags
+                </button>
+            </h2>
+            <div id="collapseFlags" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Flag Vietnam">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🇻🇳</div>
+                                    <div><div class="fw-bold">Vietnam</div><small>U+1F1FB U+1F1F3</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Flag USA">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🇺🇸</div>
+                                    <div><div class="fw-bold">United States</div><small>U+1F1FA U+1F1F8</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Flag Japan">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🇯🇵</div>
+                                    <div><div class="fw-bold">Japan</div><small>U+1F1EF U+1F1F5</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card emoji-card p-3" data-name="Rainbow Flag">
+                                <div class="d-flex align-items-center">
+                                    <div class="emoji me-3" style="cursor: pointer;" onclick="copyEmoji(this)">🏳️‍🌈</div>
+                                    <div><div class="fw-bold">Rainbow Flag</div><small>🏳️ + 🌈</small></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    document.querySelector('input[type="text"]').addEventListener('input', function () {
+        const keyword = this.value.toLowerCase();
+        const cards = document.querySelectorAll('.emoji-card');
+
+        if (keyword === "") {
+            cards.forEach(card => {
+                card.parentElement.style.display = 'block';
+            });
+            document.querySelectorAll('.accordion-collapse').forEach(accordion => {
+                accordion.classList.add('show');
+            });
+        } else {
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name');
+                const accordionBody = card.closest('.accordion-collapse');
+
+                if (name && name.toLowerCase().includes(keyword)) {
+                    card.parentElement.style.display = 'block';
+
+                    if (accordionBody) {
+                        accordionBody.classList.add('show');
+                    }
+                } else {
+                    card.parentElement.style.display = 'none';
+                }
+            });
+
+            // Ẩn các accordion không có emoji khớp
+            document.querySelectorAll('.accordion-collapse').forEach(accordion => {
+                const visibleCards = accordion.querySelectorAll('.emoji-card').length;
+                if (visibleCards === 0) {
+                    accordion.classList.remove('show');
+                }
+            });
+        }
+    });
+
+    function copyEmoji(element) {
+        const emoji = element.textContent;
+        navigator.clipboard.writeText(emoji).then(() => {
+        showToast(`Copied: ${emoji}`);
+        });
+    }
+
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.textContent = message;
+        toast.className = 'position-fixed bottom-0 end-0 m-4 p-2 bg-success text-white rounded shadow';
+        toast.style.zIndex = 9999;
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+        toast.remove();
+        }, 2000);
+    }
+</script>

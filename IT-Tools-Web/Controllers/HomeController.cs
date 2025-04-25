@@ -1,4 +1,7 @@
-﻿using System.Diagnostics;
+using System;
+using System.Diagnostics;
+using System.Net;
+using IT_Tools_Web.Data;
 using System.Security.Cryptography;
 using System.Text;
 using IT_Tools_Web.Models;
@@ -9,11 +12,29 @@ namespace IT_Tools_Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        // Test database
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly AppDbContext _context;
+
+        public HomeController(AppDbContext context)
         {
-            _logger = logger;
+            _context = context;
+        }
+
+        public IActionResult TestDb()
+        {
+            var account = new Account
+            {
+                Username = "tester",
+                Email = "tester@example.com",
+                Password = "123456",
+                Type = "user"
+            };
+
+            _context.Accounts.Add(account);
+            _context.SaveChanges();
+
+            return Content("Data inserted successfully!");
         }
 
         public IActionResult Index()
@@ -48,6 +69,63 @@ namespace IT_Tools_Web.Controllers
             return View();
         }
         public IActionResult HashText()
+        {
+            return View();
+        }
+        public IActionResult ColorConverter()
+        {
+            return View();
+        }
+        public IActionResult CaseConverter()
+        {
+            return View();
+        }
+        public IActionResult TextToNATOAlphabet()
+        {
+            return View();
+        }
+        public IActionResult Chronometer()
+        {
+            return View();
+        }
+        public IActionResult TemperatureConverter()
+        {
+            return View();
+        }
+        public IActionResult MathEvaluator()
+        {
+            return View();
+        }
+        public IActionResult PercentageCalculator()
+        {
+            return View();
+        }
+        public IActionResult LoremIpsumGenerator()
+        {
+            return View();
+        }
+        public IActionResult TextStatistics()
+        {
+            return View();
+        }
+        public IActionResult StringObfuscator()
+        {
+            return View();
+        }
+        public IActionResult IPv4Converter()
+        {
+            return View();
+        }
+        public IActionResult IPv4RangeExpander()
+        {
+            return View();
+        }
+
+        public IActionResult EmojiPicker()
+        {
+            return View();
+        }
+        public IActionResult PhoneParserAndFormatter()
         {
             return View();
         }
