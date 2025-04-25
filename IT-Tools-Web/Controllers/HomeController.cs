@@ -105,6 +105,10 @@ namespace IT_Tools_Web.Controllers
         {
             return View();
         }
+        public IActionResult PhoneParserAndFormatter()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
