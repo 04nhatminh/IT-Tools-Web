@@ -100,7 +100,7 @@ namespace IT_Tools_Web.Controllers
             return View();
         }
 
-        public IActionResult a()
+        public IActionResult RegexCheatsheet()
         {
             return View();
         }
