@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Net;
 using IT_Tools_Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -61,6 +62,10 @@ namespace IT_Tools_Web.Controllers
             return View();
         }
         public IActionResult StringObfuscator()
+        {
+            return View();
+        }
+        public IActionResult IPv4Converter()
         {
             return View();
         }
