@@ -3,3 +3,114 @@
 }
 
 <h1>@ViewData["Title"]</h1>
+
+<p>Hash a text string using the function you need: MD5, SHA1, SHA256, SHA224, SHA512, SHA384, SHA3 or RIPEMD160</p>
+
+<div class="hashtext-container container-sm my-5 p-4 border rounded bg-light" style="max-width: 600px";>
+    <div class="mb-3">
+        <label for="hash-input" class="form-label">Your text to hash:</label>
+        <textarea id="hash-input" class="form-control" rows="4" placeholder="Your string to hash..." style="resize: vertical;"></textarea>
+    </div>
+
+    <div class="mb-4">
+        <label for="encoding-select" class="form-label">Digest encoding:</label>
+        <select id="encoding-select" class="form-select">
+            <option value="Hex">Hexadecimal (base 16)</option>
+            <option value="Binary">Binary (base 2)</option>
+            <option value="Base64">Base64 (base 64)</option>
+            <option value="Base64url">Base64url (URL safe)</option>
+        </select>
+    </div>
+
+    <div id="hash-results">
+        <!-- Hash output rows will be added here -->
+    </div>
+
+    <div id="copy-alert" class="alert alert-success alert-dismissible fade show position-fixed bottom-0 start-50 translate-middle-x m-3"
+         role="alert" style="display: none; z-index: 9999;">
+        Copied to clipboard!
+    </div>
+</div>
+
+<!-- CryptoJS CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+<script>
+    const algorithms = ["MD5", "SHA1", "SHA256", "SHA224", "SHA512", "SHA384", "SHA3", "RIPEMD160"];
+    const resultsContainer = document.getElementById("hash-results");
+
+    // Add result rows dynamically
+    algorithms.forEach(algo => {
+        const row = document.createElement("div");
+        row.className = "mb-3 d-flex align-items-center gap-2";
+
+        row.innerHTML = `
+            <label class="form-label col-2 mb-0">${algo}</label>
+            <input type="text" class="form-control" id="result-${algo}" readonly />
+            <button class="btn btn-outline-secondary btn-sm" onclick="copyHash('${algo}')">
+                📋
+            </button>
+        `;
+        resultsContainer.appendChild(row);
+    });
+
+    function encodeDigest(wordArray, encoding) {
+        switch (encoding) {
+            case "Hex": return wordArray.toString(CryptoJS.enc.Hex);
+            case "Base64": return wordArray.toString(CryptoJS.enc.Base64);
+            case "Base64url":
+                return wordArray.toString(CryptoJS.enc.Base64).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+            case "Binary":
+                const hex = wordArray.toString(CryptoJS.enc.Hex);
+                return hex.split('').map(c => parseInt(c, 16).toString(2).padStart(4, '0')).join('');
+            default: return wordArray.toString();
+        }
+    }
+
+    function updateHashes() {
+        const text = document.getElementById("hash-input").value;
+        const encoding = document.getElementById("encoding-select").value;
+
+        if (!text) {
+            algorithms.forEach(algo => {
+                document.getElementById(`result-${algo}`).value = '';
+            });
+            return;
+        }
+
+        const message = CryptoJS.enc.Utf8.parse(text);
+
+        algorithms.forEach(algo => {
+            let hash;
+
+            switch (algo) {
+                case "MD5": hash = CryptoJS.MD5(message); break;
+                case "SHA1": hash = CryptoJS.SHA1(message); break;
+                case "SHA256": hash = CryptoJS.SHA256(message); break;
+                case "SHA224": hash = CryptoJS.SHA224(message); break;
+                case "SHA512": hash = CryptoJS.SHA512(message); break;
+                case "SHA384": hash = CryptoJS.SHA384(message); break;
+                case "SHA3": hash = CryptoJS.SHA3(message); break;
+                case "RIPEMD160": hash = CryptoJS.RIPEMD160(message); break;
+            }
+
+            const encoded = encodeDigest(hash, encoding);
+            document.getElementById(`result-${algo}`).value = encoded;
+        });
+    }
+
+    function copyHash(algo) {
+        const input = document.getElementById(`result-${algo}`);
+        if (!input.value) return;
+
+        navigator.clipboard.writeText(input.value).then(() => {
+            const alertBox = document.getElementById("copy-alert");
+            alertBox.style.display = "block";
+            setTimeout(() => alertBox.style.display = "none", 3000);
+        });
+    }
+
+    // Event listeners
+    document.getElementById("hash-input").addEventListener("input", updateHashes);
+    document.getElementById("encoding-select").addEventListener("change", updateHashes);
+</script>
