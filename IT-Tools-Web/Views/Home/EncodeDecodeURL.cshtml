@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Encode/decode URL-formatted strings";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>Encode text to URL-encoded format (also known as "percent-encoded"), or decode from it.</p>
+
+<div class="d-flex flex-wrap gap-3 justify-content-center">
+    <!-- Encode Block -->
+    <div class="p-4 border rounded bg-light" style="max-width: 500px; width: 100%;">
+        <h5>Encode</h5>
+        <div class="mb-3">
+            <label for="encode-input" class="form-label">Your string:</label>
+            <textarea id="encode-input" class="form-control" rows="3" style="resize: vertical;" placeholder="Enter text to encode..."></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="encode-output" class="form-label">Your string encoded:</label>
+            <textarea id="encode-output" class="form-control" rows="3" readonly style="resize: vertical;" placeholder="Encoded result will appear here..."></textarea>
+        </div>
+        <div class="mb-4 text-center">
+            <button class="btn btn-outline-secondary" onclick="copyText('encode-output', this)">Copy</button>
+        </div>
+    </div>
+
+    <!-- Decode Block -->
+    <div class="p-4 border rounded bg-light" style="max-width: 500px; width: 100%;">
+        <h5>Decode</h5>
+        <div class="mb-3">
+            <label for="decode-input" class="form-label">Your encoded string:</label>
+            <textarea id="decode-input" class="form-control" rows="3" style="resize: vertical;" placeholder="Enter URL-encoded string to decode..."></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="decode-output" class="form-label">Your string decoded:</label>
+            <textarea id="decode-output" class="form-control" rows="3" readonly style="resize: vertical;" placeholder="Decoded result will appear here..."></textarea>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-outline-secondary" onclick="copyText('decode-output', this)">Copy</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.getElementById('encode-input').addEventListener('input', () => {
+        const input = document.getElementById('encode-input').value;
+        document.getElementById('encode-output').value = encodeURIComponent(input);
+    });
+
+    document.getElementById('decode-input').addEventListener('input', () => {
+        const input = document.getElementById('decode-input').value;
+        try {
+            document.getElementById('decode-output').value = decodeURIComponent(input);
+        } catch {
+            document.getElementById('decode-output').value = "Invalid encoded string.";
+        }
+    });
+
+    function copyText(id, icon) {
+        const input = document.getElementById(id);
+        navigator.clipboard.writeText(input.value).then(() => {
+            icon.setAttribute("title", "Copied!");
+            const tooltip = new bootstrap.Tooltip(icon);
+            tooltip.show();
+
+            setTimeout(() => {
+                icon.setAttribute("title", "Copy to clipboard");
+                tooltip.dispose();
+            }, 1500);
+        });
+    }
+</script>

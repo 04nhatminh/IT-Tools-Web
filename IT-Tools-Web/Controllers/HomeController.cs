@@ -2,8 +2,11 @@ using System;
 using System.Diagnostics;
 using System.Net;
 using IT_Tools_Web.Data;
+using System.Security.Cryptography;
+using System.Text;
 using IT_Tools_Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace IT_Tools_Web.Controllers
 {
@@ -34,21 +37,34 @@ namespace IT_Tools_Web.Controllers
             return Content("Data inserted successfully!");
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         public IActionResult Login()
         {
             ViewBag.HideLayout = true;
             return View();
         }
+
         public IActionResult Signup()
         {
             ViewBag.HideLayout = true;
             return View();
         }
-        public IActionResult Index()
+
+        public IActionResult TokenGenerator()
         {
             return View();
         }
-        public IActionResult TokenGenerator()
+
+        public IActionResult RomanNumberConvert()
+        {
+            return View();
+        }
+
+        public IActionResult Bcrypt()
         {
             return View();
         }
@@ -114,10 +130,72 @@ namespace IT_Tools_Web.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult ULIDGenerator()
+        {
+            return View();
+        }
+
+        public IActionResult IntegerBaseConverter()
+        {
+            return View();
+        }
+
+        public IActionResult RomanNumeralConverter()
+        {
+            return View();
+        }
+
+        public IActionResult EncodeDecodeURL()
+        {
+            return View();
+        }
+        public IActionResult EscapeHTML()
+        {
+            return View();
+        }
+
+        public IActionResult DeviceInformation()
+        {
+            return View();
+        }
+
+        public IActionResult BasicAuthGenerator()
+        {
+            return View();
+        }
+        public IActionResult QRCodeGenerator()
+        {
+            return View();
+        }
+
+        public IActionResult GitCheatsheet()
+        {
+            return View();
+        }
+
+        public IActionResult RandomPortGenerator()
+        {
+            return View();
+        }
+
+        public IActionResult RegexCheatsheet()
+        {
+            return View();
+        }
+
+        public IActionResult SlugifyString ()
+        {
+            return View();
+        }
+
+
+
+
+
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
+
