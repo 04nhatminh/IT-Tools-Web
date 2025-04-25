@@ -112,6 +112,10 @@ namespace IT_Tools_Web.Controllers
         {
             return View();
         }
+        public IActionResult NumeronymGenerator()
+        {
+            return View();
+        }
         public IActionResult IPv4Converter()
         {
             return View();
