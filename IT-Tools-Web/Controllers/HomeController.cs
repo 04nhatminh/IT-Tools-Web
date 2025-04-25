@@ -60,6 +60,10 @@ namespace IT_Tools_Web.Controllers
         {
             return View();
         }
+        public IActionResult CaseConverter()
+        {
+            return View();
+        }
         public IActionResult Chronometer()
         {
             return View();
