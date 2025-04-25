@@ -74,6 +74,14 @@ namespace IT_Tools_Web.Controllers
         {
             return View();
         }
+        public IActionResult IPv4SubnetCalculator()
+        {
+            return View();
+        }
+        public IActionResult EmojiPicker()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
