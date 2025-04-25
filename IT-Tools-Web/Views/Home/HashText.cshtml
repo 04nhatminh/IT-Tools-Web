@@ -3,29 +3,3 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-
-<form method="post">
-    <div class="mb-3">
-        <label for="inputText" class="form-label">Enter text to hash:</label>
-        <input type="text" name="inputText" class="form-control" required />
-    </div>
-
-    <div class="mb-3">
-        <label for="algorithm" class="form-label">Select algorithm:</label>
-        <select name="algorithm" class="form-select">
-            <option value="MD5">MD5</option>
-            <option value="SHA1">SHA1</option>
-            <option value="SHA256">SHA256</option>
-            <option value="SHA512">SHA512</option>
-        </select>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Generate Hash</button>
-</form>
-
-@if (ViewBag.Result != null)
-{
-    <div class="alert alert-success mt-4">
-        <strong>Hashed result:</strong> <code>@ViewBag.Result</code>
-    </div>
-}

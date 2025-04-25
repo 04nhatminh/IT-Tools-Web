@@ -1,0 +1,117 @@
+﻿@{
+    ViewData["Title"] = "Bcrypt";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>Hash and compare text string using bcrypt. Bcrypt is a password-hashing function based on the Blowfish cipher.</p>
+
+<div class="container my-5 p-4">
+    <div class="row d-flex justify-content-between">
+
+        <!-- Hash Section -->
+        <div class="col-md-5 p-3 border rounded bg-light">
+            <h4>Bcrypt Hash</h4>
+            <div class="mb-3">
+                <label for="hash-input" class="form-label">Your string:</label>
+                <input type="text" id="hash-input" class="form-control" placeholder="Your string to bcrypt...">
+            </div>
+            <div class="mb-3">
+                <label for="salt-rounds" class="form-label">Salt count:</label>
+                <input type="number" id="salt-rounds" class="form-control" value="10" min="4" max="15">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Hash result:</label>
+                <input type="text" id="hash-result" class="form-control" readonly>
+                <button class="btn btn-outline-primary mt-2" onclick="copyHash()">Copy hash</button>
+            </div>
+        </div>
+
+        <!-- Compare Section -->
+        <div class="col-md-5 p-3 border rounded bg-light">
+            <h4>Compare string with hash</h4>
+            <div class="mb-3">
+                <label for="compare-text" class="form-label">Your string:</label>
+                <input type="text" id="compare-text" class="form-control" placeholder="Your string to compare...">
+            </div>
+            <div class="mb-3">
+                <label for="compare-hash" class="form-label">Your hash:</label>
+                <input type="text" id="compare-hash" class="form-control" placeholder="Your hash to compare...">
+            </div>
+            <div class="mb-3 d-flex align-items-center gap-2">
+                <p class="m-0">Do thay match? </p>
+                <div id="compare-result" class="fw-bold"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="copy-alert" class="alert alert-success position-fixed bottom-0 start-50 translate-middle-x m-3"
+         role="alert" style="display: none; z-index: 9999;">
+        Hash copied to clipboard!
+    </div>
+</div>
+
+<!-- Bcrypt CDN -->
+<script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
+<script>window.bcrypt = dcodeIO.bcrypt;</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const hashInput = document.getElementById("hash-input");
+        const saltRoundsInput = document.getElementById("salt-rounds");
+        const hashResult = document.getElementById("hash-result");
+        const copyAlert = document.getElementById("copy-alert");
+
+        const compareText = document.getElementById("compare-text");
+        const compareHash = document.getElementById("compare-hash");
+        const compareResult = document.getElementById("compare-result");
+
+        const debounce = (fn, delay) => {
+            let timeout;
+            return (...args) => {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => fn(...args), delay);
+            };
+        };
+
+        const autoHash = debounce(() => {
+            const text = hashInput.value;
+            const saltRounds = parseInt(saltRoundsInput.value, 10);
+            if (!text) return hashResult.value = "";
+
+            bcrypt.hash(text, saltRounds, (err, hash) => {
+                hashResult.value = err ? "Error generating hash" : hash;
+            });
+        }, 300);
+
+        const autoCompare = debounce(() => {
+            const text = compareText.value;
+            const hash = compareHash.value;
+            if (!text || !hash) return compareResult.textContent = "";
+
+            bcrypt.compare(text, hash, (err, result) => {
+                if (err) {
+                    compareResult.textContent = "Error comparing.";
+                    compareResult.className = "fw-bold text-warning";
+                    return;
+                }
+                compareResult.textContent = result ? "Yes" : "No.";
+                compareResult.className = "fw-bold " + (result ? "text-success" : "text-danger");
+            });
+        }, 300);
+
+        window.copyHash = function () {
+            if (!hashResult.value) return;
+            navigator.clipboard.writeText(hashResult.value).then(() => {
+                copyAlert.style.display = "block";
+                setTimeout(() => copyAlert.style.display = "none", 3000);
+            });
+        };
+
+        hashInput.addEventListener("input", autoHash);
+        saltRoundsInput.addEventListener("input", autoHash);
+        compareText.addEventListener("input", autoCompare);
+        compareHash.addEventListener("input", autoCompare);
+    });
+</script>

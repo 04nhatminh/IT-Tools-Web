@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/IT_Tools_Web.styles.css" asp-append-version="true" />
+    
 </head>
 <body>
     @if (ViewBag.HideLayout != true)
@@ -46,6 +47,7 @@
                     <ul class="collapse list-unstyled ps-3" id="cryptoMenu">
                         <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
                         <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Bcrypt">Bcrypt</a></li>
                     </ul>
                 </li>
                 <li>

@@ -46,7 +46,6 @@
         </div>
     </div>
 
-
     <div class="length-slider mb-3">
         <label for="length" class="form-label">Length: <span id="length-value">64</span></label>
         <input type="range" class="form-range" id="length" min="1" max="128" value="64" />
@@ -78,7 +77,7 @@
         const upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         const numberChars = "0123456789";
         const lowerChars = "abcdefghijklmnopqrstuvwxyz";
-        const symbolChars = "!#$%^&*()-_=+[]{}|;:',.<>?/";
+        const symbolChars = "@@!#$%^&*()-_=+[]{}|;:',.<>?/";
 
         let charPool = "";
         if (useUppercase) charPool += upperChars;
@@ -114,9 +113,9 @@
         document.execCommand('copy');
 
         const alertBox = document.getElementById('copy-alert');
-        alertBox.style.display = 'block'; // hiện alert
+        alertBox.style.display = 'block'; 
         setTimeout(() => {
-            alertBox.style.display = 'none'; // tự ẩn sau 3s
+            alertBox.style.display = 'none';
         }, 3000);
     });
 
