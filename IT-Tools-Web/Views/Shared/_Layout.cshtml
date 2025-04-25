@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/IT_Tools_Web.styles.css" asp-append-version="true" />
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
     @if (ViewBag.HideLayout != true)
@@ -68,6 +68,7 @@
                             <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="EncodeDecodeURL">Encode/decode URL-formatted strings</a></li>
                             <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="EscapeHTML">Escape HTML entities</a></li>
                             <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="DeviceInformation">Device information</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="BasicAuthGenerator">Basic auth generator</a></li>
                     </ul>
                 </li>
                 <li>
