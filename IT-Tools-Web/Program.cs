@@ -10,6 +10,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
 builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<ToolService>();
+builder.Services.AddScoped<ToolLoaderService>();
 
 // Add session service
 builder.Services.AddSession(options =>
@@ -24,6 +25,14 @@ builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 app.UseSession();
+
+// Quét thư mục Tools và load dữ liệu vào database
+using (var scope = app.Services.CreateScope())
+{
+    var toolLoader = scope.ServiceProvider.GetRequiredService<ToolLoaderService>();
+    var toolsDirectory = Path.Combine(app.Environment.ContentRootPath, "Tools");
+    toolLoader.LoadToolsFromDirectory(toolsDirectory);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

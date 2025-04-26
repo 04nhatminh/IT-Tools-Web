@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "Escape HTML Entities";
+    Layout = (string)(ViewData["Layout"] ?? "_Layout");
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>Escape or unescape HTML entities (replace characters like <,>, &, " and \' with their HTML version).</p>
+
+<div class="d-flex flex-wrap gap-3 justify-content-center">
+    <!-- Escape Block -->
+    <div class="p-4 border rounded bg-light" style="max-width: 500px; width: 100%;">
+        <h5>Escape</h5>
+        <div class="mb-3">
+            <label for="escape-input" class="form-label">Your string:</label>
+            <textarea id="escape-input" class="form-control" rows="3" style="resize: vertical;" placeholder="Enter text to escape..."></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="escape-output" class="form-label">Your string escaped:</label>
+            <textarea id="escape-output" class="form-control" rows="3" readonly style="resize: vertical;" placeholder="Escaped result will appear here..."></textarea>
+        </div>
+        <div class="mb-4 text-center">
+            <button class="btn btn-outline-secondary" onclick="copyText('escape-output', this)">Copy</button>
+        </div>
+    </div>
+
+    <!-- Unescape Block -->
+    <div class="p-4 border rounded bg-light" style="max-width: 500px; width: 100%;">
+        <h5>Unescape</h5>
+        <div class="mb-3">
+            <label for="unescape-input" class="form-label">Your escaped string:</label>
+            <textarea id="unescape-input" class="form-control" rows="3" style="resize: vertical;" placeholder="Enter HTML-escaped string to unescape..."></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="unescape-output" class="form-label">Your string unescaped:</label>
+            <textarea id="unescape-output" class="form-control" rows="3" readonly style="resize: vertical;" placeholder="Unescaped result will appear here..."></textarea>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-outline-secondary" onclick="copyText('unescape-output', this)">Copy</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const htmlEscape = str => str.replace(/&/g, "&amp;")
+                                 .replace(/</g, "&lt;")
+                                 .replace(/>/g, "&gt;")
+                                 .replace(/\"/g, "&quot;")
+                                 .replace(/'/g, "&#039;");
+
+    const htmlUnescape = str => str.replace(/&lt;/g, "<")
+                                   .replace(/&gt;/g, ">")
+                                   .replace(/&quot;/g, '"')
+                                   .replace(/&#039;/g, "'")
+                                   .replace(/&amp;/g, "&");
+
+    document.getElementById('escape-input').addEventListener('input', () => {
+        const input = document.getElementById('escape-input').value;
+        document.getElementById('escape-output').value = htmlEscape(input);
+    });
+
+    document.getElementById('unescape-input').addEventListener('input', () => {
+        const input = document.getElementById('unescape-input').value;
+        document.getElementById('unescape-output').value = htmlUnescape(input);
+    });
+
+    function copyText(id, icon) {
+        const input = document.getElementById(id);
+        navigator.clipboard.writeText(input.value).then(() => {
+            icon.setAttribute("title", "Copied!");
+            const tooltip = new bootstrap.Tooltip(icon);
+            tooltip.show();
+
+            setTimeout(() => {
+                icon.setAttribute("title", "Copy to clipboard");
+                tooltip.dispose();
+            }, 1500);
+        });
+    }
+</script>

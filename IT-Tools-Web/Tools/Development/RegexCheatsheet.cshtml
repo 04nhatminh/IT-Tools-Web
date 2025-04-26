@@ -1,0 +1,157 @@
+﻿@{
+    ViewData["Title"] = "Regex cheatsheet";
+    Layout = (string)(ViewData["Layout"] ?? "_Layout");
+}
+
+<h1>@ViewData["Title"]</h1>
+<p>JavaScript Regex/Regular Expression cheatsheet</p>
+
+<div class="container-sm my-4 p-4 border rounded bg-light" style="max-width: 600px;">
+    <h3>Normal characters</h3>
+    <table class="table table-bordered">
+        <thead><tr><th>Expression</th><th>Description</th></tr></thead>
+        <tbody>
+            <tr><td>. or [^\n\r]</td><td>any character excluding a newline or carriage return</td></tr>
+            <tr><td>[A-Za-z]</td><td>alphabet</td></tr>
+            <tr><td>[a-z]</td><td>lowercase alphabet</td></tr>
+            <tr><td>[A-Z]</td><td>uppercase alphabet</td></tr>
+            <tr><td>\d or [0-9]</td><td>digit</td></tr>
+            <tr><td>\D or [^0-9]</td><td>non-digit</td></tr>
+            <tr><td>_</td><td>underscore</td></tr>
+            <tr><td>\w or [A-Za-z0-9_]</td><td>alphabet, digit or underscore</td></tr>
+            <tr><td>\W or [^A-Za-z0-9_]</td><td>inverse of \w</td></tr>
+            <tr><td>\S</td><td>inverse of \s</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Whitespace characters</h3>
+    <table class="table table-bordered">
+        <thead><tr><th>Expression</th><th>Description</th></tr></thead>
+        <tbody>
+            <tr><td>space</td><td>space</td></tr>
+            <tr><td>\t</td><td>tab</td></tr>
+            <tr><td>\n</td><td>newline</td></tr>
+            <tr><td>\r</td><td>carriage return</td></tr>
+            <tr><td>\s</td><td>space, tab, newline or carriage return</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Character set</h3>
+    <table class="table table-bordered">
+        <thead><tr><th>Expression</th><th>Description</th></tr></thead>
+        <tbody>
+            <tr><td>[xyz]</td><td>either x, y or z</td></tr>
+            <tr><td>[^xyz]</td><td>neither x, y nor z</td></tr>
+            <tr><td>[1-3]</td><td>either 1, 2 or 3</td></tr>
+            <tr><td>[^1-3]</td><td>neither 1, 2 nor 3</td></tr>
+        </tbody>
+    </table>
+    <p>
+        Think of a character set as an OR operation on the single characters that are enclosed between the square brackets.<br>
+        Use ^ after the opening [ to “negate” the character set.<br>
+        Within a character set, . means a literal period.
+    </p>
+
+    <h3>Characters that require escaping</h3>
+    <h5>Outside a character set</h5>
+    <table class="table table-bordered">
+        <thead><tr><th>Expression</th><th>Description</th></tr></thead>
+        <tbody>
+            <tr><td>\.</td><td>period</td></tr>
+            <tr><td>\^</td><td>caret</td></tr>
+            <tr><td>\$</td><td>dollar sign</td></tr>
+            <tr><td>|</td><td>pipe</td></tr>
+            <tr><td>\\</td><td>back slash</td></tr>
+            <tr><td>\/<td>forward slash</td></tr>
+            <tr><td>\(</td><td>opening bracket</td></tr>
+            <tr><td>\)</td><td>closing bracket</td></tr>
+            <tr><td>\[</td><td>opening square bracket</td></tr>
+            <tr><td>\]</td><td>closing square bracket</td></tr>
+            <tr><td>\{</td><td>opening curly bracket</td></tr>
+            <tr><td>\}</td><td>closing curly bracket</td></tr>
+        </tbody>
+    </table>
+    <h5>Inside a character set</h5>
+    <table class="table table-bordered">
+        <thead><tr><th>Expression</th><th>Description</th></tr></thead>
+        <tbody>
+            <tr><td>\\</td><td>back slash</td></tr>
+            <tr><td>\]</td><td>closing square bracket</td></tr>
+        </tbody>
+    </table>
+    <p>
+        A ^ must be escaped only if it occurs immediately after the opening [ of the character set.<br>
+        A - must be escaped only if it occurs between two alphabets or two digits.
+    </p>
+
+    <h3>Quantifiers</h3>
+    <table class="table table-bordered">
+        <thead><tr><th>Expression</th><th>Description</th></tr></thead>
+        <tbody>
+            <tr><td>{2}</td><td>exactly 2</td></tr>
+            <tr><td>{2,}</td><td>at least 2</td></tr>
+            <tr><td>{2,7}</td><td>at least 2 but no more than 7</td></tr>
+            <tr><td>*</td><td>0 or more</td></tr>
+            <tr><td>+</td><td>1 or more</td></tr>
+            <tr><td>?</td><td>exactly 0 or 1</td></tr>
+        </tbody>
+    </table>
+    <p>The quantifier goes after the expression to be quantified.</p>
+
+    <h3>Boundaries</h3>
+    <table class="table table-bordered">
+        <thead><tr><th>Expression</th><th>Description</th></tr></thead>
+        <tbody>
+            <tr><td>^</td><td>start of string</td></tr>
+            <tr><td>$</td><td>end of string</td></tr>
+            <tr><td>\b</td><td>word boundary</td></tr>
+        </tbody>
+    </table>
+    <p>
+        How word boundary matching works:<br>
+        - At the beginning of the string if the first character is \w.<br>
+        - Between two adjacent characters within the string, if the first character is \w and the second character is \W.<br>
+        - At the end of the string if the last character is \w.
+    </p>
+
+    <h3>Matching</h3>
+    <table class="table table-bordered">
+        <thead><tr><th>Expression</th><th>Description</th></tr></thead>
+        <tbody>
+            <tr><td>foo|bar</td><td>match either foo or bar</td></tr>
+            <tr><td>foo(?=bar)</td><td>match foo if it’s before bar</td></tr>
+            <tr><td>foo(?!bar)</td><td>match foo if it’s not before bar</td></tr>
+            <tr><td>(?&lt;=bar)foo</td><td>match foo if it’s after bar</td></tr>
+            <tr><td>(?&lt;!bar)foo</td><td>match foo if it’s not after bar</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Grouping and capturing</h3>
+    <table class="table table-bordered">
+        <thead><tr><th>Expression</th><th>Description</th></tr></thead>
+        <tbody>
+            <tr><td>(foo)</td><td>capturing group; match and capture foo</td></tr>
+            <tr><td>(?:foo)</td><td>non-capturing group; match foo but without capturing foo</td></tr>
+            <tr><td>(foo)bar\1</td><td>\1 is a backreference to the 1st capturing group; match foobarfoo</td></tr>
+        </tbody>
+    </table>
+    <ul>
+        <li>
+            <strong>Capturing groups are only relevant in the following methods:</strong>
+            <ul>
+                <li>string.match(regexp)</li>
+                <li>string.matchAll(regexp)</li>
+                <li>string.replace(regexp, callback)</li>
+            </ul>
+        </li>
+        <li>
+            <code>\N</code> is a backreference to the Nth capturing group. Capturing groups are numbered starting from 1.
+        </li>
+    </ul>
+
+    <h3>References and tools</h3>
+    <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions">MDN</a></li>
+        <li><a href="https://projects.verou.me/regexplained/">RegExplained</a></li>
+    </ul>
+</div>

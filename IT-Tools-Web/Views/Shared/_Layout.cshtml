@@ -1,4 +1,6 @@
-﻿@inject IHttpContextAccessor HttpContextAccessor
+﻿@using IT_Tools_Web.Business.Services
+@inject IHttpContextAccessor HttpContextAccessor
+@inject ToolService ToolService
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,17 +26,28 @@
                     <input class="form-control me-2" type="search" placeholder="Search for tools..." aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
-                <div class="ms-3">
-                    @if (HttpContextAccessor.HttpContext.Session.GetString("UserType") == null || HttpContextAccessor.HttpContext.Session.GetString("UserType") == "premium")
-                    {
-                        
-                    }
-                    else
+                <div class="mx-2">
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("UserType") == "user")
                     {
                         <button class="btn btn-outline-dark">Buy premium</button>
                     }
+                    else
+                    {
+
+                    }
+
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("UserType") == "admin")
+                    {
+                        <button class="btn btn-outline-dark p-0">
+                            <a class="nav-link text-primary" asp-controller="Tool" asp-action="AddTool">Add Tool</a>
+                        </button>
+                    }
+                    else
+                    {
+
+                    }
                 </div>
-                <div class="ms-3 d-flex align-items-center gap-2">
+                <div class="d-flex align-items-center gap-2">
                     @if (HttpContextAccessor.HttpContext.Session.GetString("Username") != null)
                     {
                         <a asp-area="" asp-controller="Account" asp-action="Logout" class="btn btn-outline-danger">Log out</a>
@@ -54,106 +67,47 @@
         <nav class="bg-light border-end position-fixed top-0 start-0" id="sidebar" style="width: 250px; height: 100vh; padding: 15px; overflow-y:auto">
             <a class="navbar-brand text-black fs-6" asp-area="" asp-controller="Home" asp-action="Index">IT - TOOLS - GROUP - 16</a>
             <ul class="nav flex-column mt-4">
-                <li>
-                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#cryptoMenu">
-                        Crypto
-                    </a>
-                    <ul class="collapse list-unstyled ps-3" id="cryptoMenu">
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TokenGenerator">Token generator</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="HashText">Hash text</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Bcrypt">Bcrypt</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="ULIDGenerator">ULID generator</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#converterMenu">
-                        Converter
-                    </a>
-                    <ul class="collapse list-unstyled ps-3" id="converterMenu">
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="ColorConverter">Color converter</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="CaseConverter">Case converter</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TextToNATOAlphabet">Text to NATO alphabet</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="IntegerBaseConverter">Integer base converter</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="RomanNumeralConverter">Roman numeral converter</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#webMenu">
-                        Web
-                    </a>
-                    <ul class="collapse list-unstyled ps-3" id="webMenu">
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="EncodeDecodeURL">Encode/decode URL-formatted strings</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="EscapeHTML">Escape HTML entities</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="DeviceInformation">Device information</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="BasicAuthGenerator">Basic auth generator</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="SlugifyString">Slugify string</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#imgVidMenu">
-                        Images & Videos
-                    </a>
-                    <ul class="collapse list-unstyled ps-3" id="imgVidMenu">
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="QRCodeGenerator">QR Code Generator</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#developmentMenu">
-                        Development
-                    </a>
-                    <ul class="collapse list-unstyled ps-3" id="developmentMenu">
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="GitCheatsheet">Git cheatsheet</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="RandomPortGenerator">Random port generator</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="RegexCheatsheet">Regex cheatsheet</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#networkMenu">
-                        Network
-                    </a>
-                    <ul class="collapse list-unstyled ps-3" id="networkMenu">
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="IPv4Converter">IPv4 address converter</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="IPv4RangeExpander">IPv4 range expander</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#mathMenu">
-                        Math
-                    </a>
-                    <ul class="collapse list-unstyled ps-3" id="mathMenu">
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="MathEvaluator">Math evaluator</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="PercentageCalculator">Percentage calculator</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#measurementMenu">
-                        Measurement
-                    </a>
-                    <ul class="collapse list-unstyled ps-3" id="measurementMenu">
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Chronometer">Chronometer</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TemperatureConverter">Temperature converter</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#textMenu">
-                        Text
-                    </a>
-                    <ul class="collapse list-unstyled ps-3" id="textMenu">
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="LoremIpsumGenerator">Lorem ipsum generator</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="TextStatistics">Text statistics</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="StringObfuscator">String obfuscator</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="EmojiPicker">Emoji picker</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="NumeronymGenerator">Numeronym generator</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#dataMenu">
-                        Data
-                    </a>
-                    <ul class="collapse list-unstyled ps-3" id="dataMenu">
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="PhoneParserAndFormatter">Phone parser and formatter</a></li>
-                    </ul>
-                </li>
+                @if (HttpContextAccessor.HttpContext.Session.GetString("Username") != null)
+                {
+                    <li>
+                        <a class="btn w-100 text-start" data-bs-toggle="collapse" href="favTools">
+                            Favorite tools
+                        </a>
+                        <ul class="collapse list-unstyled ps-3" id="favTools">
+                            @* @foreach (var tool in category) *@
+                            @* { *@
+                            @*     <li class="nav-item"> *@
+                            @*         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="LoadTool" asp-route-path="@tool.Path"> *@
+                            @*             @tool.Name *@
+                            @*         </a> *@
+                            @*     </li> *@
+                            @* } *@
+                        </ul>
+                    </li>
+                }
+                else
+                {
+                
+                }
+
+                @foreach (var category in ToolService.GetEnabledTools().GroupBy(t => t.Category))
+                {
+                    <li>
+                        <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#@category.Key">
+                            @category.Key
+                        </a>
+                        <ul class="collapse list-unstyled ps-3" id="@category.Key">
+                            @foreach (var tool in category)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="LoadTool" asp-route-path="@tool.Path">
+                                        @tool.Name
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
             </ul>
         </nav>
         <main class="flex-grow-1 p-4" style="margin-left:250px">  

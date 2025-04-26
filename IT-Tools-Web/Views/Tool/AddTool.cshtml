@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Add Tool";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>Add New Tool</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="AddTool" method="post" enctype="multipart/form-data">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group mb-3">
+                            <label for="file" class="form-label">Select .cshtml File</label>
+                            <input type="file" name="file" class="form-control" />
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Upload Tool</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

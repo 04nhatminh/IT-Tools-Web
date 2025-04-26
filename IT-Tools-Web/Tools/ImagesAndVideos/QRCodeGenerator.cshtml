@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "QR Code generator";
+    Layout = (string)(ViewData["Layout"] ?? "_Layout");
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>Generate and download a QR code for a URL (or just plain text), and customize the background and foreground colors.</p>
+
+<div class="container-sm my-4 p-4 border rounded bg-light" style="max-width: 500px;">
+    <div class="mb-3">
+        <label for="qr-text" class="form-label">Text:</label>
+        <input type="text" class="form-control" id="qr-text" placeholder="Your link or text" value="https://it-tools.tech">
+    </div>
+
+    <div class="mb-3 row">
+        <div class="col">
+            <label for="foreground" class="form-label">Foreground color:</label>
+            <input type="color" class="form-control form-control-color" id="foreground" value="#000000">
+        </div>
+        <div class="col">
+            <label for="background" class="form-label">Background color:</label>
+            <input type="color" class="form-control form-control-color" id="background" value="#ffffff">
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="error-level" class="form-label">Error resistance:</label>
+        <select class="form-select" id="error-level">
+            <option value="L">low</option>
+            <option value="M" selected>medium</option>
+            <option value="Q">quartile</option>
+            <option value="H">high</option>
+        </select>
+    </div>
+
+    <div class="text-center my-4">
+        <div id="qr-code" class="d-inline-block p-2 border rounded bg-white"></div>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-outline-primary" onclick="downloadQR()">Download QR code</button>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script>
+        let qr;
+
+        function generateQR() {
+            const container = document.getElementById("qr-code");
+            container.innerHTML = ""; // clear old
+
+            const text = document.getElementById("qr-text").value;
+            const fg = document.getElementById("foreground").value;
+            const bg = document.getElementById("background").value;
+            const level = document.getElementById("error-level").value;
+
+            qr = new QRCode(container, {
+                text: text,
+                width: 200,
+                height: 200,
+                colorDark: fg,
+                colorLight: bg,
+                correctLevel: QRCode.CorrectLevel[level]
+            });
+        }
+
+        function downloadQR() {
+            const img = document.querySelector("#qr-code img");
+            if (!img) return;
+            const link = document.createElement("a");
+            link.href = img.src;
+            link.download = "qr-code.png";
+            link.click();
+        }
+
+        // Auto-generate QR on input
+        document.getElementById("qr-text").addEventListener("input", generateQR);
+        document.getElementById("foreground").addEventListener("input", generateQR);
+        document.getElementById("background").addEventListener("input", generateQR);
+        document.getElementById("error-level").addEventListener("change", generateQR);
+
+        // Generate once on load
+        generateQR();
+    </script>
+}

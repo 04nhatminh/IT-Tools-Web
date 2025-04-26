@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "IPv4 address converter";
+    Layout = (string)(ViewData["Layout"] ?? "_Layout");
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Convert an IP address into decimal, binary, hexadecimal, or even an IPv6 representation of it.</p>
+
+<div class="container py-5">
+    <div class="mb-3">
+        <label for="ipv4Input" class="form-label">The ipv4 address:</label>
+        <input type="text" class="form-control" id="ipv4Input" placeholder="1.1.1.1">
+    </div>
+
+    <hr>
+
+    <div class="mb-3 row align-items-center">
+        <label class="col-sm-2 col-form-label">Decimal:</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="decimalOutput" readonly>
+        </div>
+        <div class="col-sm-1">
+            <span class="btn btn-outline-secondary copy-btn" onclick="copyToClipboard('decimalOutput')">Copy</span>
+        </div>
+    </div>
+
+    <div class="mb-3 row align-items-center">
+        <label class="col-sm-2 col-form-label">Hexadecimal:</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="hexOutput" readonly>
+        </div>
+        <div class="col-sm-1">
+            <span class="btn btn-outline-secondary copy-btn" onclick="copyToClipboard('hexOutput')">Copy</span>
+        </div>
+    </div>
+
+    <div class="mb-3 row align-items-center">
+        <label class="col-sm-2 col-form-label">Binary:</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="binaryOutput" readonly>
+        </div>
+        <div class="col-sm-1">
+            <span class="btn btn-outline-secondary copy-btn" onclick="copyToClipboard('binaryOutput')">Copy</span>
+        </div>
+    </div>
+
+    <div class="mb-3 row align-items-center">
+        <label class="col-sm-2 col-form-label">Ipv6:</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="ipv6Output" readonly>
+        </div>
+        <div class="col-sm-1">
+            <span class="btn btn-outline-secondary copy-btn" onclick="copyToClipboard('ipv6Output')">Copy</span>
+        </div>
+    </div>
+
+    <div class="mb-3 row align-items-center">
+        <label class="col-sm-2 col-form-label">Ipv6 (short):</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="ipv6ShortOutput" readonly>
+        </div>
+        <div class="col-sm-1">
+            <span class="btn btn-outline-secondary copy-btn" onclick="copyToClipboard('ipv6ShortOutput')">Copy</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    function copyToClipboard(id) {
+      const input = document.getElementById(id);
+      input.select();
+      input.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+    }
+
+    // Optional: Auto update outputs when typing IPv4
+    document.getElementById('ipv4Input').addEventListener('input', function () {
+        const ip = this.value.trim();
+        const parts = ip.split('.').map(Number);
+
+        if (parts.length === 4 && parts.every(n => n >= 0 && n <= 255)) {
+        const decimal = (parts[0] << 24) + (parts[1] << 16) + (parts[2] << 8) + parts[3];
+        const hex = parts.map(p => p.toString(16).padStart(2, '0')).join('');
+        const binary = parts.map(p => p.toString(2).padStart(8, '0')).join('');
+        const ipv6 = `0000:0000:0000:0000:0000:ffff:${parts[0].toString(16).padStart(2, '0')}${parts[1].toString(16).padStart(2, '0')}:${parts[2].toString(16).padStart(2, '0')}${parts[3].toString(16).padStart(2, '0')}`;
+        const ipv6Short = `::ffff:${parts[0].toString(16)}${parts[1].toString(16)}:${parts[2].toString(16)}${parts[3].toString(16)}`;
+
+        document.getElementById('decimalOutput').value = decimal;
+        document.getElementById('hexOutput').value = hex;
+        document.getElementById('binaryOutput').value = binary;
+        document.getElementById('ipv6Output').value = ipv6;
+        document.getElementById('ipv6ShortOutput').value = ipv6Short;
+        } else {
+        document.getElementById('decimalOutput').value = '';
+        document.getElementById('hexOutput').value = '';
+        document.getElementById('binaryOutput').value = '';
+        document.getElementById('ipv6Output').value = '';
+        document.getElementById('ipv6ShortOutput').value = '';
+        }
+    });
+</script>

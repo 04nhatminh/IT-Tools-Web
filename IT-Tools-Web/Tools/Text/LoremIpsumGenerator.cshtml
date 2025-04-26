@@ -1,0 +1,99 @@
+﻿@{  
+    ViewData["Title"] = "Lorem ipsum generator";  
+    Layout = (string)(ViewData["Layout"] ?? "_Layout");
+}  
+<h1>@ViewData["Title"]</h1>  
+
+<p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content</p>  
+<div class="col-8 flex-column">
+    <div>
+        <label for="paragraphs">Number of paragraphs:</label>
+        <input type="range" id="paragraphs" name="paragraphs" min="1" max="20" value="3" oninput="generateLorem()" onchange="document.getElementById('paragraphsValue').innerText = this.value">
+        <span id="paragraphsValue">3</span>
+    </div>
+
+    <div>
+        <label for="sentences">Number of sentences per paragraph:</label>
+        <input type="range" id="sentences" name="sentences" min="1" max="50" value="5" oninput="generateLorem()" onchange="document.getElementById('sentencesValue').innerText = this.value">
+        <span id="sentencesValue">5</span>
+    </div>
+
+    <div>
+        <label for="words">Number of words per sentence:</label>
+        <input type="range" id="words" name="words" min="1" max="50" value="20" oninput="generateLorem()" onchange="document.getElementById('wordsValue').innerText = this.value">
+        <span id="wordsValue">10</span>
+    </div>
+
+    <div class="form-check form-switch mt-3">
+        <input class="form-check-input" type="checkbox" id="startLorem" checked onchange="generateLorem()">
+        <label class="form-check-label" for="startLorem">Start with lorem ipsum ?</label>
+    </div>
+
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="asHtml" onchange="generateLorem()">
+        <label class="form-check-label" for="asHtml">As html ?</label>
+    </div>
+
+    <textarea id="output" class="form-control mt-3" rows="6" readonly></textarea>
+
+    <div class="d-flex justify-content-center mt-3 gap-2">
+        <button class="btn btn-secondary" onclick="copyText()">Copy</button>
+        <button class="btn btn-success" onclick="generateLorem()">Refresh</button>
+    </div>
+</div>
+
+<script>
+    const loremWords = ["lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit", "curabitur", "vel", "hendrerit", "libero", "eleifend", "blandit", "nunc", "ornare", "odio", "ut", "orci", "gravida", "imperdiet", "nullam", "purus", "lacinia", "a", "pretium", "quis"];
+
+    function getRandomWord() {
+      return loremWords[Math.floor(Math.random() * loremWords.length)];
+    }
+
+    function generateSentence(words) {
+      let sentence = [];
+      for (let i = 0; i < words; i++) {
+        sentence.push(getRandomWord());
+      }
+      let result = sentence.join(' ');
+      return result.charAt(0).toUpperCase() + result.slice(1) + '.';
+    }
+
+    function generateLorem() {
+      const paragraphs = parseInt(document.getElementById("paragraphs").value);
+      const sentences = parseInt(document.getElementById("sentences").value);
+      const words = parseInt(document.getElementById("words").value);
+      const startLorem = document.getElementById("startLorem").checked;
+      const asHtml = document.getElementById("asHtml").checked;
+
+      let result = [];
+
+      for (let i = 0; i < paragraphs; i++) {
+        let paragraph = [];
+
+        for (let j = 0; j < sentences; j++) {
+          let sentence = generateSentence(words);
+          paragraph.push(sentence);
+        }
+
+        let text = paragraph.join(" ");
+        if (i === 0 && startLorem) {
+          text = "Lorem ipsum dolor sit amet. " + text;
+        }
+
+        result.push(text);
+      }
+
+      const output = document.getElementById("output");
+      output.value = asHtml ? result.map(p => `<p>${p}</p>`).join("\n") : result.join("\n\n");
+    }
+
+    function copyText() {
+      const output = document.getElementById("output");
+      output.select();
+      document.execCommand("copy");
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        generateLorem();
+    });
+</script>

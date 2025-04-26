@@ -1,0 +1,364 @@
+﻿@{
+    ViewData["Title"] = "Phone parser and formatter";
+    Layout = (string)(ViewData["Layout"] ?? "_Layout");
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Parse, validate and format phone numbers. Get information about the phone number, like the country code, type, etc.</p>
+<div class="container">
+    <div class="card mx-auto" style="max-width: 700px;">
+        <div class="card-body">
+
+            <h5 class="mb-3">Phone Parser and Formatter</h5>
+
+            <div class="mb-3">
+                <label for="countryCode" class="form-label">Default country code:</label>
+                <select id="countryCode" class="form-select">
+                    <option>AC (+247)</option>  
+                    <option>Andorra (+376)</option>  
+                    <option>United Arab Emirates (+971)</option>  
+                    <option>Afghanistan (+93)</option>  
+                    <option>Antigua and Barbuda (+1)</option>  
+                    <option>Anguilla (+1)</option>  
+                    <option>Albania (+355)</option>  
+                    <option>Armenia (+374)</option>  
+                    <option>Angola (+244)</option>  
+                    <option>Argentina (+54)</option>  
+                    <option>American Samoa (+1)</option>  
+                    <option>Austria (+43)</option>  
+                    <option>Australia (+61)</option>  
+                    <option>Aruba (+297)</option>  
+                    <option>Åland Islands (+358)</option>  
+                    <option>Azerbaijan (+994)</option>  
+                    <option>Bosnia and Herzegovina (+387)</option>  
+                    <option>Barbados (+1)</option>  
+                    <option>Bangladesh (+880)</option>  
+                    <option>Belgium (+32)</option>  
+                    <option>Burkina Faso (+226)</option>  
+                    <option>Bulgaria (+359)</option>  
+                    <option>Bahrain (+973)</option>  
+                    <option>Burundi (+257)</option>  
+                    <option>Benin (+229)</option>  
+                    <option>Saint Barthélemy (+590)</option>  
+                    <option>Bermuda (+1)</option>  
+                    <option>Brunei (+673)</option>  
+                    <option>Bolivia (+591)</option>  
+                    <option>Bonaire (+599)</option>  
+                    <option>Brazil (+55)</option>  
+                    <option>The Bahamas (+1)</option>  
+                    <option>Bhutan (+975)</option>  
+                    <option>Botswana (+267)</option>  
+                    <option>Belarus (+375)</option>  
+                    <option>Belize (+501)</option>  
+                    <option>Canada (+1)</option>  
+                    <option>Cocos (Keeling) Islands (+61)</option>  
+                    <option>Democratic Republic of the Congo (+243)</option>  
+                    <option>Central African Republic (+236)</option>  
+                    <option>Republic of the Congo (+242)</option>  
+                    <option>Switzerland (+41)</option>  
+                    <option>Cote d'Ivoire (+225)</option>  
+                    <option>Cook Islands (+682)</option>  
+                    <option>Chile (+56)</option>  
+                    <option>Cameroon (+237)</option>  
+                    <option>China (+86)</option>  
+                    <option>Colombia (+57)</option>  
+                    <option>Costa Rica (+506)</option>  
+                    <option>Cuba (+53)</option>  
+                    <option>Cape Verde (+238)</option>  
+                    <option>Curaçao (+599)</option>  
+                    <option>Christmas Island (+61)</option>  
+                    <option>Cyprus (+357)</option>  
+                    <option>Czech Republic (+420)</option>  
+                    <option>Germany (+49)</option>  
+                    <option>Djibouti (+253)</option>  
+                    <option>Denmark (+45)</option>  
+                    <option>Dominica (+1)</option>  
+                    <option>Dominican Republic (+1)</option>  
+                    <option>Algeria (+213)</option>  
+                    <option>Ecuador (+593)</option>  
+                    <option>Estonia (+372)</option>  
+                    <option>Egypt (+20)</option>  
+                    <option>Western Sahara (+212)</option>  
+                    <option>Eritrea (+291)</option>  
+                    <option>Spain (+34)</option>  
+                    <option>Ethiopia (+251)</option>  
+                    <option>Finland (+358)</option>  
+                    <option>Fiji (+679)</option>  
+                    <option>Falkland Islands (Islas Malvinas) (+500)</option>  
+                    <option>Federated States of Micronesia (+691)</option>  
+                    <option>Faroe Islands (+298)</option>  
+                    <option>France (+33)</option>  
+                    <option>Gabon (+241)</option>  
+                    <option>United Kingdom (+44)</option>  
+                    <option>Grenada (+1)</option>  
+                    <option>Georgia (+995)</option>  
+                    <option>French Guiana (+594)</option>  
+                    <option>Guernsey (+44)</option>  
+                    <option>Ghana (+233)</option>  
+                    <option>Gibraltar (+350)</option>  
+                    <option>Greenland (+299)</option>  
+                    <option>The Gambia (+220)</option>  
+                    <option>Guinea (+224)</option>  
+                    <option>Guadeloupe (+590)</option>  
+                    <option>Equatorial Guinea (+240)</option>  
+                    <option>Greece (+30)</option>  
+                    <option>Guatemala (+502)</option>  
+                    <option>Guam (+1)</option>  
+                    <option>Guinea-Bissau (+245)</option>  
+                    <option>Guyana (+592)</option>  
+                    <option>Hong Kong (+852)</option>  
+                    <option>Honduras (+504)</option>  
+                    <option>Croatia (+385)</option>  
+                    <option>Haiti (+509)</option>  
+                    <option>Hungary (+36)</option>  
+                    <option>Indonesia (+62)</option>  
+                    <option>Ireland (+353)</option>  
+                    <option>Israel (+972)</option>  
+                    <option>Isle of Man (+44)</option>  
+                    <option>India (+91)</option>  
+                    <option>British Indian Ocean Territory (+246)</option>  
+                    <option>Iraq (+964)</option>  
+                    <option>Iran (+98)</option>  
+                    <option>Iceland (+354)</option>  
+                    <option>Italy (+39)</option>  
+                    <option>Jersey (+44)</option>  
+                    <option>Jamaica (+1)</option>  
+                    <option>Jordan (+962)</option>  
+                    <option>Japan (+81)</option>  
+                    <option>Kenya (+254)</option>  
+                    <option>Kyrgyzstan (+996)</option>  
+                    <option>Cambodia (+855)</option>  
+                    <option>Kiribati (+686)</option>  
+                    <option>Comoros (+269)</option>  
+                    <option>Saint Kitts and Nevis (+1)</option>  
+                    <option>North Korea (+850)</option>  
+                    <option>South Korea (+82)</option>  
+                    <option>Kuwait (+965)</option>  
+                    <option>Cayman Islands (+1)</option>  
+                    <option>Kazakhstan (+7)</option>  
+                    <option>Laos (+856)</option>  
+                    <option>Lebanon (+961)</option>  
+                    <option>Saint Lucia (+1)</option>  
+                    <option>Liechtenstein (+423)</option>  
+                    <option>Sri Lanka (+94)</option>  
+                    <option>Liberia (+231)</option>  
+                    <option>Lesotho (+266)</option>  
+                    <option>Lithuania (+370)</option>  
+                    <option>Luxembourg (+352)</option>  
+                    <option>Latvia (+371)</option>  
+                    <option>Libya (+218)</option>  
+                    <option>Morocco (+212)</option>  
+                    <option>Monaco (+377)</option>  
+                    <option>Moldova (+373)</option>  
+                    <option>Montenegro (+382)</option>  
+                    <option>Saint Martin (+590)</option>  
+                    <option>Madagascar (+261)</option>  
+                    <option>Marshall Islands (+692)</option>  
+                    <option>North Macedonia (+389)</option>  
+                    <option>Mali (+223)</option>  
+                    <option>Myanmar (Burma) (+95)</option>  
+                    <option>Mongolia (+976)</option>  
+                    <option>Macau (+853)</option>  
+                    <option>Northern Mariana Islands (+1)</option>  
+                    <option>Martinique (+596)</option>  
+                    <option>Mauritania (+222)</option>  
+                    <option>Montserrat (+1)</option>  
+                    <option>Malta (+356)</option>  
+                    <option>Mauritius (+230)</option>  
+                    <option>Maldives (+960)</option>  
+                    <option>Malawi (+265)</option>  
+                    <option>Mexico (+52)</option>  
+                    <option>Malaysia (+60)</option>  
+                    <option>Mozambique (+258)</option>  
+                    <option>Namibia (+264)</option>  
+                    <option>New Caledonia (+687)</option>  
+                    <option>Niger (+227)</option>  
+                    <option>Norfolk Island (+672)</option>  
+                    <option>Nigeria (+234)</option>  
+                    <option>Nicaragua (+505)</option>  
+                    <option>Netherlands (+31)</option>  
+                    <option>Norway (+47)</option>  
+                    <option>Nepal (+977)</option>  
+                    <option>Nauru (+674)</option>  
+                    <option>Niue (+683)</option>  
+                    <option>New Zealand (+64)</option>  
+                    <option>Oman (+968)</option>  
+                    <option>Panama (+507)</option>  
+                    <option>Peru (+51)</option>  
+                    <option>French Polynesia (+689)</option>  
+                    <option>Papua New Guinea (+675)</option>  
+                    <option>Philippines (+63)</option>  
+                    <option>Pakistan (+92)</option>  
+                    <option>Poland (+48)</option>  
+                    <option>Saint Pierre and Miquelon (+508)</option>  
+                    <option>Puerto Rico (+1)</option>  
+                    <option>Palestinian Territory (+970)</option>  
+                    <option>Portugal (+351)</option>  
+                    <option>Palau (+680)</option>  
+                    <option>Paraguay (+595)</option>  
+                    <option>Qatar (+974)</option>  
+                    <option>Reunion (+262)</option>  
+                    <option>Romania (+40)</option>  
+                    <option>Serbia (+381)</option>  
+                    <option>Russia (+7)</option>  
+                    <option>Rwanda (+250)</option>  
+                    <option>Saudi Arabia (+966)</option>  
+                    <option>Solomon Islands (+677)</option>  
+                    <option>Seychelles (+248)</option>  
+                    <option>Sudan (+249)</option>  
+                    <option>Sweden (+46)</option>  
+                    <option>Singapore (+65)</option>  
+                    <option>Saint Helena (+290)</option>  
+                    <option>Slovenia (+386)</option>  
+                    <option>Svalbard (+47)</option>  
+                    <option>Slovakia (+421)</option>  
+                    <option>Sierra Leone (+232)</option>  
+                    <option>San Marino (+378)</option>  
+                    <option>Senegal (+221)</option>  
+                    <option>Somalia (+252)</option>  
+                    <option>Suriname (+597)</option>  
+                    <option>South Sudan (+211)</option>  
+                    <option>Sao Tome and Principe (+239)</option>  
+                    <option>El Salvador (+503)</option>  
+                    <option>Sint Maarten (+1)</option>  
+                    <option>Syria (+963)</option>  
+                    <option>Eswatini (+268)</option>  
+                    <option>TA (+290)</option>  
+                    <option>Turks and Caicos Islands (+1)</option>  
+                    <option>Chad (+235)</option>  
+                    <option>Togo (+228)</option>  
+                    <option>Thailand (+66)</option>  
+                    <option>Tajikistan (+992)</option>  
+                    <option>Tokelau (+690)</option>  
+                    <option>Timor-Leste (+670)</option>  
+                    <option>Turkmenistan (+993)</option>  
+                    <option>Tunisia (+216)</option>  
+                    <option>Tonga (+676)</option>  
+                    <option>Turkey (+90)</option>  
+                    <option>Trinidad and Tobago (+1)</option>  
+                    <option>Tuvalu (+688)</option>  
+                    <option>Taiwan (+886)</option>  
+                    <option>Tanzania (+255)</option>  
+                    <option>Ukraine (+380)</option>  
+                    <option>Uganda (+256)</option>  
+                    <option>United States (+1)</option>  
+                    <option>Uruguay (+598)</option>  
+                    <option>Uzbekistan (+998)</option>  
+                    <option>Holy See (Vatican City) (+39)</option>  
+                    <option>Saint Vincent and the Grenadines (+1)</option>  
+                    <option>Venezuela (+58)</option>  
+                    <option>British Virgin Islands (+1)</option>  
+                    <option>Virgin Islands (+1)</option>  
+                    <option selected>Vietnam (+84)</option>  
+                    <option>Vanuatu (+678)</option>  
+                    <option>Wallis and Futuna (+681)</option>  
+                    <option>Western Samoa (+685)</option>  
+                    <option>Republic of Kosovo (+383)</option>  
+                    <option>Yemen (+967)</option>  
+                    <option>Mayotte (+262)</option>  
+                    <option>South Africa (+27)</option>  
+                    <option>Zambia (+260)</option>  
+                    <option>Zimbabwe (+263)</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="phoneNumber" class="form-label">Phone number:</label>
+                <input type="text" id="phoneNumber" class="form-control" placeholder="Enter phone number" value="0900123456">
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered bg-white">
+                    <tbody id="resultTable">
+                        <tr>
+                            <th>Country</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Country calling code</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Is valid?</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Is possible?</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Type</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>International format</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>National format</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>E.164 format</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>RFC3966 format</th>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.10.24/bundle/libphonenumber-max.js"></script>
+<script>
+    const countrySelect = document.getElementById('countryCode');
+    const phoneInput = document.getElementById('phoneNumber');
+    const resultTable = document.getElementById('resultTable');
+
+    function parsePhoneNumber() {
+      const selectedText = countrySelect.options[countrySelect.selectedIndex].text;
+      const countryName = selectedText.split(' (')[0];
+      const countryCode = selectedText.match(/\+(\d+)/)?.[1] || '';
+      const fullNumber = '+' + countryCode + phoneInput.value.replace(/\s+/g, '');
+
+      try {
+        const phone = libphonenumber.parsePhoneNumber(fullNumber);
+
+        resultTable.innerHTML = `
+          <tr><th>Country (Code)</th><td>${phone.country}</td></tr>
+          <tr><th>Country (Name)</th><td>${countryName}</td></tr>
+          <tr><th>Country calling code</th><td>${phone.countryCallingCode}</td></tr>
+          <tr><th>Is valid?</th><td>${phone.isValid() ? 'Yes' : 'No'}</td></tr>
+          <tr><th>Is possible?</th><td>${phone.isPossible() ? 'Yes' : 'No'}</td></tr>
+          <tr><th>Type</th><td>${phone.getType() || 'Unknown'}</td></tr>
+          <tr><th>International format</th><td>${phone.formatInternational()}</td></tr>
+          <tr><th>National format</th><td>${phone.formatNational()}</td></tr>
+          <tr><th>E.164 format</th><td>${phone.format('E.164')}</td></tr>
+          <tr><th>RFC3966 format</th><td>${phone.format('RFC3966')}</td></tr>
+        `;
+      } catch (error) {
+        resultTable.innerHTML = `
+          <tr><th>Country (Code)</th><td>${phone.country}</td></tr>
+          <tr><th>Country (Name)</th><td>${countryName}</td></tr>
+          <tr><th>Country calling code</th><td>${countryCode}</td></tr>
+          <tr><th>Is valid?</th><td>No</td></tr>
+          <tr><th>Is possible?</th><td>No</td></tr>
+          <tr><th>Type</th><td>Unknown</td></tr>
+          <tr><th>International format</th><td>${fullNumber}</td></tr>
+          <tr><th>National format</th><td>${phoneInput.value}</td></tr>
+          <tr><th>E.164 format</th><td>${fullNumber.replace(/\s+/g, '')}</td></tr>
+          <tr><th>RFC3966 format</th><td>tel:${fullNumber.replace(/\s+/g, '')}</td></tr>
+        `;
+      }
+    }
+
+    countrySelect.addEventListener('change', parsePhoneNumber);
+    phoneInput.addEventListener('input', parsePhoneNumber);
+
+    parsePhoneNumber();
+</script>

@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "Text to NATO alphabet";
+    Layout = (string)(ViewData["Layout"] ?? "_Layout");
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Transform text into the NATO phonetic alphabet for oral transmission.</p>
+<div class="container">
+    <div class="mx-auto" style="max-width: 600px;">
+
+        <div class="mb-4">
+            <label for="inputText" class="form-label">Your text to convert to NATO phonetic alphabet</label>
+            <div class="input-group">
+                <input type="text" id="inputText" class="form-control" placeholder="Enter text">
+                <button class="btn btn-outline-secondary" type="button" id="clearBtn">×</button>
+            </div>
+        </div>
+
+        <div class="mb-2" id="output-container" hidden>
+            <label class="form-label">Your text in NATO phonetic alphabet</label>
+            <div class="output-box bg-secondary bg-opacity-10 p-3" id="outputText"></div>
+        </div>
+
+        <button class="btn btn-secondary" id="copyBtn" hidden>Copy NATO string</button>
+
+    </div>
+</div>
+
+<script>
+    const natoMap = {
+        A: "Alpha", B: "Bravo", C: "Charlie", D: "Delta", E: "Echo",
+        F: "Foxtrot", G: "Golf", H: "Hotel", I: "India", J: "Juliett",
+        K: "Kilo", L: "Lima", M: "Mike", N: "November", O: "Oscar",
+        P: "Papa", Q: "Quebec", R: "Romeo", S: "Sierra", T: "Tango",
+        U: "Uniform", V: "Victor", W: "Whiskey", X: "X-ray", Y: "Yankee", Z: "Zulu",
+        0: "Zero", 1: "One", 2: "Two", 3: "Three", 4: "Four",
+        5: "Five", 6: "Six", 7: "Seven", 8: "Eight", 9: "Nine"
+    };
+
+    const inputText = document.getElementById('inputText');
+    const outputContainer = document.getElementById('output-container');
+    const outputText = document.getElementById('outputText');
+    const copyBtn = document.getElementById('copyBtn');
+    const clearBtn = document.getElementById('clearBtn');
+
+    function convertToNATO(text) {
+        return text
+            .toUpperCase()
+            .split('')
+            .map(c => natoMap[c] || c)
+            .join(' ');
+    }
+
+    inputText.addEventListener('input', () => {
+        if(inputText.value == "") {
+            outputContainer.hidden = true;
+            copyBtn.hidden = true;
+        }
+        else {
+            outputContainer.hidden = false;
+            copyBtn.hidden = false;
+            outputText.textContent = convertToNATO(inputText.value);
+        }
+    });
+
+    copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(outputText.textContent).then(() => {
+        copyBtn.textContent = "Copied!";
+        setTimeout(() => copyBtn.textContent = "Copy NATO string", 2000);
+        });
+    });
+
+    clearBtn.addEventListener('click', () => {
+        inputText.value = '';
+        outputContainer.hidden = true;
+        copyBtn.hidden = true;
+        outputText.textContent = '';
+        inputText.focus();
+    });
+</script>

@@ -1,0 +1,176 @@
+﻿@{
+    ViewData["Title"] = "Integer base converter";
+    Layout = (string)(ViewData["Layout"] ?? "_Layout");
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>Convert a number between different bases (decimal, hexadecimal, binary, octal, base64, ...)</p>
+
+<div class="container-sm my-5 p-4 border rounded bg-light" style="max-width: 600px">
+    <div class="mb-3">
+        <label for="input-number" class="form-label">Input number:</label>
+        <input type="text" id="input-number" class="form-control" value="42">
+    </div>
+    <div class="mb-3">
+        <label for="input-base" class="form-label">Input base:</label>
+        <input type="number" id="input-base" class="form-control" value="10" min="2" max="64">
+    </div>
+
+    <div id="error-message" class="alert alert-danger" style="display:none"></div>
+
+    <hr style="opacity: 0.3">
+
+    <div class="mb-3 d-flex align-items-center gap-2">
+        <label for="binary-output" class="form-label mb-0">Binary (2)</label>
+        <div class="position-relative ms-auto" style="width: 330px;">
+            <input type="text" class="form-control pe-5" id="binary-output" readonly placeholder="Binary version will be here...">
+            <span class="position-absolute top-50 end-0 translate-middle-y me-2 text-muted"
+                  style="cursor: pointer;"
+                  onclick="copyText('binary-output', this)"
+                  title="Copy to clipboard">📋</span>
+        </div>
+    </div>
+
+    <div class="mb-3 d-flex align-items-center gap-2">
+        <label for="octal-output" class="form-label mb-0">Octal (8)</label>
+        <div class="position-relative ms-auto" style="width: 330px;">
+            <input type="text" class="form-control pe-5" id="octal-output" readonly placeholder="Octal version will be here...">
+            <span class="position-absolute top-50 end-0 translate-middle-y me-2 text-muted"
+                  style="cursor: pointer;"
+                  onclick="copyText('binary-output', this)"
+                  title="Copy to clipboard">📋</span>
+        </div>
+    </div>
+
+    <div class="mb-3 d-flex align-items-center gap-2">
+        <label for="decimal-output" class="form-label mb-0">Decimal (10)</label>
+        <div class="position-relative ms-auto" style="width: 330px;">
+            <input type="text" class="form-control pe-5" id="decimal-output" readonly placeholder="Decimal version will be here...">
+            <span class="position-absolute top-50 end-0 translate-middle-y me-2 text-muted"
+                  style="cursor: pointer;"
+                  onclick="copyText('binary-output', this)"
+                  title="Copy to clipboard">📋</span>
+        </div>
+    </div>
+
+    <div class="mb-3 d-flex align-items-center gap-2">
+        <label for="hex-output" class="form-label mb-0">Hexadecimal (16)</label>
+        <div class="position-relative ms-auto" style="width: 330px;">
+            <input type="text" class="form-control pe-5" id="hex-output" readonly placeholder="Hexadecimal version will be here...">
+            <span class="position-absolute top-50 end-0 translate-middle-y me-2 text-muted"
+                  style="cursor: pointer;"
+                  onclick="copyText('binary-output', this)"
+                  title="Copy to clipboard">📋</span>
+        </div>
+    </div>
+
+    <div class="mb-3 d-flex align-items-center gap-2">
+        <label for="base64-output" class="form-label mb-0">Base64 (64)</label>
+        <div class="position-relative ms-auto" style="width: 330px;">
+            <input type="text" class="form-control pe-5" id="base64-output" readonly placeholder="Base64 version will be here...">
+            <span class="position-absolute top-50 end-0 translate-middle-y me-2 text-muted"
+                  style="cursor: pointer;"
+                  onclick="copyText('binary-output', this)"
+                  title="Copy to clipboard">📋</span>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="custom-base" class="form-label">Custom base:</label>
+        <input type="number" id="custom-base" class="form-control mb-1" value="20" min="2" max="64">
+        <div class="d-flex align-items-center gap-2">
+            <label for="custom-output" class="form-label mb-0">Base</label>
+            <div class="position-relative ms-auto" style="width: 330px;">
+                <input type="text" class="form-control pe-5" id="custom-output" readonly placeholder="Base 20 version will be here...">
+                <span class="position-absolute top-50 end-0 translate-middle-y me-2 text-muted"
+                      style="cursor: pointer;"
+                      onclick="copyText('binary-output', this)"
+                      title="Copy to clipboard">📋</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const base64Chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/";
+
+    function parseInput(str, base) {
+        const validChars = base64Chars.slice(0, base);
+        for (let c of str) {
+            if (!validChars.includes(c.toUpperCase())) {
+                throw new Error(`Invalid digit \"${c}\" for base ${base}.`);
+            }
+        }
+        return parseInt(str, base);
+    }
+
+    function convertFromDecimal(value, base) {
+        if (base <= 36) return value.toString(base).toUpperCase();
+        let result = "";
+        do {
+            result = base64Chars[value % base] + result;
+            value = Math.floor(value / base);
+        } while (value > 0);
+        return result;
+    }
+
+    function updateOutputs() {
+        const numberStr = document.getElementById("input-number").value.trim();
+        const base = parseInt(document.getElementById("input-base").value);
+        const customBase = parseInt(document.getElementById("custom-base").value);
+        const errorDiv = document.getElementById("error-message");
+
+        const outputs = {
+            "binary-output": [2, "Binary version will be here..."],
+            "octal-output": [8, "Octal version will be here..."],
+            "decimal-output": [10, "Decimal version will be here..."],
+            "hex-output": [16, "Hexadecimal version will be here..."],
+            "base64-output": [64, "Base64 version will be here..."],
+            "custom-output": [customBase, `Base ${customBase} version will be here...`]
+        };
+
+        if (!numberStr) {
+            errorDiv.style.display = "none";
+            for (let id in outputs) {
+                document.getElementById(id).value = "";
+                document.getElementById(id).placeholder = outputs[id][1];
+            }
+            return;
+        }
+
+        try {
+            const decValue = parseInput(numberStr, base);
+            errorDiv.style.display = "none";
+
+            for (let id in outputs) {
+                document.getElementById(id).value = convertFromDecimal(decValue, outputs[id][0]);
+            }
+        } catch (err) {
+            errorDiv.textContent = err.message;
+            errorDiv.style.display = "block";
+        }
+    }
+
+    function copyText(id, icon) {
+        const input = document.getElementById(id);
+        navigator.clipboard.writeText(input.value).then(() => {
+            icon.setAttribute("title", "Copied!");
+            const tooltip = new bootstrap.Tooltip(icon);
+            tooltip.show();
+
+            setTimeout(() => {
+                icon.setAttribute("title", "Copy to clipboard");
+                tooltip.dispose();
+            }, 1500);
+        });
+    }
+
+
+
+    document.getElementById("input-number").addEventListener("input", updateOutputs);
+    document.getElementById("input-base").addEventListener("input", updateOutputs);
+    document.getElementById("custom-base").addEventListener("input", updateOutputs);
+
+    window.addEventListener("DOMContentLoaded", updateOutputs);
+</script>

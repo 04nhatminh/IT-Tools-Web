@@ -16,4 +16,9 @@ public class ToolService
     {
         return _context.Tools.ToList();
     }
+
+    public List<Tool> GetEnabledTools()
+    {
+        return _context.Tools.Where(t => t.IsEnabled).ToList();
+    }
 }
