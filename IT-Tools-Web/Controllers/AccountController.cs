@@ -102,4 +102,27 @@ public class AccountController : Controller
         HttpContext.Session.Clear(); // Xóa tất cả session
         return RedirectToAction("Login");
     }
+
+    [HttpPost]
+    public IActionResult UpgradeToPremium()
+    {
+        // Lấy UserId từ session
+        var userId = HttpContext.Session.GetInt32("UserId");
+        if (userId == null)
+        {
+            return Unauthorized("You must be logged in to upgrade your account.");
+        }
+
+        // Nâng cấp tài khoản lên premium
+        var success = _accountService.UpgradeToPremium((int)userId);
+        if (!success)
+        {
+            return BadRequest("Failed to upgrade account to premium.");
+        }
+
+        // Cập nhật UserType trong session
+        HttpContext.Session.SetString("UserType", "premium");
+
+        return Ok("Account upgraded to premium successfully.");
+    }
 }

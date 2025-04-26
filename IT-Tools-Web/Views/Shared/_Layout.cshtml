@@ -35,7 +35,7 @@
                 <div class="mx-2">
                     @if (HttpContextAccessor.HttpContext.Session.GetString("UserType") == "user")
                     {
-                        <button class="btn btn-outline-dark">Buy premium</button>
+                            <button class="btn btn-outline-dark" onclick="upgradeToPremium()">Buy premium</button>
                     }
                     else
                     {
@@ -139,6 +139,29 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        function upgradeToPremium() {
+            fetch('/Account/UpgradeToPremium', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Your account has been upgraded to premium!');
+                    location.reload(); // Tải lại trang để cập nhật giao diện
+                } else {
+                    response.text().then(text => alert(text));
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while upgrading your account.');
+            });
+        }
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -65,4 +65,17 @@ public class AccountService
         // Tìm tài khoản dựa trên username và password
         return _context.Accounts.FirstOrDefault(a => a.Username == username && a.Password == password);
     }
+
+    public bool UpgradeToPremium(int userId)
+    {
+        var account = _context.Accounts.FirstOrDefault(a => a.Id == userId);
+        if (account == null)
+        {
+            return false; // Tài khoản không tồn tại
+        }
+
+        account.Type = "premium"; // Cập nhật loại tài khoản
+        _context.SaveChanges();
+        return true;
+    }
 }
