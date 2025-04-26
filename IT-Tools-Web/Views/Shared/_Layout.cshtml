@@ -28,8 +28,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <form class="d-flex ms-auto">
-                    <input class="form-control me-2" type="search" placeholder="Search for tools..." aria-label="Search">
+                <form class="d-flex ms-auto" asp-controller="Home" asp-action="Index" method="get">
+                    <input class="form-control me-2" type="search" name="searchQuery" placeholder="Search for tools..." aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
                 <div class="mx-2">

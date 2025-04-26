@@ -20,9 +20,21 @@ namespace IT_Tools_Web.Controllers
         {
             _toolService = toolService;
         }
-        public IActionResult Index()
+        public IActionResult Index(string searchQuery = null)
         {
-            return View();
+            // Lấy UserType từ session
+            var userType = HttpContext.Session.GetString("UserType") ?? "anonymous";
+
+            // Lấy danh sách tools phù hợp với người dùng
+            var tools = _toolService.GetToolsForUser(userType);
+
+            // Nếu có từ khóa tìm kiếm, lọc danh sách tools
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                tools = tools.Where(t => t.Name.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            return View(tools);
         }
 
         public IActionResult LoadTool(string path)

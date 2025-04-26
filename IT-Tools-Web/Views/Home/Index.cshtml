@@ -1,16 +1,24 @@
-﻿@{
+﻿@model List<IT_Tools_Web.DataAccess.Models.Tool>
+
+@{
     ViewData["Title"] = "Home";
 }
 
+<h1 class="mb-4">All Tools</h1>
+
 <div class="container">
     <div class="row">
-        <div class="col-3 bg-secondary text-white p-3 d-flex flex-column m-2">
-            <h3>Token generator</h3>
-            <p>Generate random string with the chars you want,...</p>
-        </div>
-        <div class="col-3 bg-secondary text-white p-3 d-flex flex-column m-2">
-            <h3>Hash text</h3>
-            <p>Hash a text string using the function you need : MD5,...</p>
-        </div>
+        @foreach (var tool in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@tool.Name</h5>
+                        <p class="card-text">Category: @tool.Category</p>
+                        <a asp-controller="Home" asp-action="LoadTool" asp-route-path="@tool.Path" class="btn btn-primary">Open Tool</a>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </div>
