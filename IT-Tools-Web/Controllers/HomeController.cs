@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Net;
 using System.Security.Cryptography;
@@ -7,18 +7,17 @@ using IT_Tools_Web.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using static System.Formats.Asn1.AsnWriter;
 using IT_Tools_Web.DataAccess;
+using IT_Tools_Web.Business.Services;
 
 namespace IT_Tools_Web.Controllers
 {
     public class HomeController : Controller
     {
-        // Test database
+        private readonly AccountService _accountService;
 
-        private readonly AppDbContext _context;
-
-        public HomeController(AppDbContext context)
+        public HomeController(AccountService accountService)
         {
-            _context = context;
+            _accountService = accountService;
         }
 
         public IActionResult TestDb()
@@ -31,8 +30,7 @@ namespace IT_Tools_Web.Controllers
                 Type = "user"
             };
 
-            _context.Accounts.Add(account);
-            _context.SaveChanges();
+            _accountService.AddAccount(account);
 
             return Content("Data inserted successfully!");
         }
@@ -48,10 +46,40 @@ namespace IT_Tools_Web.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Signup()
         {
             ViewBag.HideLayout = true;
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Signup(Account account)
+        {
+            if (ModelState.IsValid)
+            {
+                var isRegistered = _accountService.RegisterAccount(account);
+                if (isRegistered)
+                {
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    // Thêm thông báo lỗi vào ModelState
+                    ModelState.AddModelError("", "The username or email is already in use. Please try again.");
+                }
+            }
+            else
+            {
+                // Ghi log lỗi để kiểm tra
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    Debug.WriteLine(error.ErrorMessage);
+                }
+            }
+
+            ViewBag.HideLayout = true;
+            return View(account);
         }
 
         public IActionResult TokenGenerator()
