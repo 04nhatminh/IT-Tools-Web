@@ -1,4 +1,5 @@
 ﻿@using IT_Tools_Web.Business.Services
+@using System.Diagnostics
 @inject IHttpContextAccessor HttpContextAccessor
 @inject ToolService ToolService
 
@@ -74,25 +75,36 @@
             <ul class="nav flex-column mt-4">
                 @if (HttpContextAccessor.HttpContext.Session.GetString("Username") != null)
                 {
+                    int userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId").Value;
+                    Debug.WriteLine("userid");
+                    Debug.WriteLine(userId);
+                    
+                    var favoriteTools = ToolService.GetFavoriteToolsForUser(userId);
+
                     <li>
-                        <a class="btn w-100 text-start" data-bs-toggle="collapse" href="favTools">
-                            Favorite tools
+                        <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#favTools">
+                            Favorite Tools
                         </a>
                         <ul class="collapse list-unstyled ps-3" id="favTools">
-                            @* @foreach (var tool in category) *@
-                            @* { *@
-                            @*     <li class="nav-item"> *@
-                            @*         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="LoadTool" asp-route-path="@tool.Path"> *@
-                            @*             @tool.Name *@
-                            @*         </a> *@
-                            @*     </li> *@
-                            @* } *@
+                            @if (favoriteTools.Any())
+                            {
+                                @foreach (var tool in favoriteTools)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="LoadTool" asp-route-path="@tool.Path">
+                                            @tool.Name
+                                        </a>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <span class="text-muted">No favorite tools yet.</span>
+                                </li>
+                            }
                         </ul>
                     </li>
-                }
-                else
-                {
-                
                 }
 
                 @foreach (var category in tools.GroupBy(t => t.Category))
@@ -127,6 +139,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

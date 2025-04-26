@@ -2,6 +2,7 @@
 using IT_Tools_Web.DataAccess;
 using IT_Tools_Web.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using System.IO;
 
 namespace IT_Tools_Web.Controllers
@@ -68,6 +69,40 @@ namespace IT_Tools_Web.Controllers
             _toolLoaderService.LoadToolsFromDirectory(baseDirectory);
 
             return RedirectToAction("Index", "Home"); // Chuyển hướng về trang chính hoặc danh sách tools
+        }
+
+        public class AddToFavoriteRequest
+        {
+            public int ToolId { get; set; }
+        }
+
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public IActionResult AddToFavorite([FromBody] AddToFavoriteRequest request)
+        {
+            int toolId = request.ToolId;
+            Debug.WriteLine($"ToolID:{toolId}");
+            // Logic xử lý
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return Unauthorized("You must be logged in to add a tool to favorites.");
+            }
+
+            var tool = _toolService.GetToolById(toolId);
+            if (tool == null)
+            {
+                return NotFound("Tool not found.");
+            }
+
+            var isAlreadyFavorite = _toolService.IsToolFavorite((int)userId, toolId);
+            if (isAlreadyFavorite)
+            {
+                return BadRequest("Tool is already in your favorites.");
+            }
+
+            _toolService.AddToFavorite((int)userId, toolId);
+            return Ok("Tool added to favorites successfully.");
         }
     }
 }

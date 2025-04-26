@@ -4,7 +4,39 @@
 }
 
 <h1>@ViewData["Title"]</h1>
+@inject IHttpContextAccessor HttpContextAccessor
 
+@if (HttpContextAccessor.HttpContext.Session.GetString("UserType") != null)
+{
+    <button class="btn btn-outline-dark my-2" onclick="addToFavorite(@ViewData["ToolId"])">Add To Favorite</button>
+}
+else
+{
+
+}
+
+<script>
+    function addToFavorite(toolId) {
+        fetch('/Tool/AddToFavorite', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ toolId: toolId })
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Tool added to favorites successfully!');
+            } else {
+                response.text().then(text => alert(text));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while adding the tool to favorites.');
+        });
+    }
+</script>
 <p>Generate and download a QR code for a URL (or just plain text), and customize the background and foreground colors.</p>
 
 <div class="container-sm my-4 p-4 border rounded bg-light" style="max-width: 500px;">

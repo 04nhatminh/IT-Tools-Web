@@ -15,11 +15,10 @@ namespace IT_Tools_Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ICompositeViewEngine _viewEngine;
-
-        public HomeController(ICompositeViewEngine viewEngine)
+        private readonly ToolService _toolService;
+        public HomeController(ToolService toolService)
         {
-            _viewEngine = viewEngine;
+            _toolService = toolService;
         }
         public IActionResult Index()
         {
@@ -39,6 +38,14 @@ namespace IT_Tools_Web.Controllers
             {
                 return NotFound(); // Trả về 404 nếu tệp không tồn tại
             }
+
+            var tool = _toolService.GetToolByPath(path);
+            if (tool == null)
+            {
+                return NotFound(); // Trả về 404 nếu tool không tồn tại
+            }
+
+            ViewData["ToolId"] = tool.Id;
 
             return View($"~/Tools/{normalizedPath}");
         }

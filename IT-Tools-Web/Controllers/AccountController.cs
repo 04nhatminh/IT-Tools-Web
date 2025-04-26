@@ -84,6 +84,7 @@ public class AccountController : Controller
             // Lưu thông tin đăng nhập vào session hoặc cookie
             HttpContext.Session.SetString("Username", account.Username);
             HttpContext.Session.SetString("UserType", account.Type);
+            HttpContext.Session.SetInt32("UserId", account.Id); 
 
             return RedirectToAction("Index", "Home");
         }
