@@ -59,4 +59,10 @@ public class AccountService
         AddAccount(account);
         return true;
     }
+
+    public Account Authenticate(string username, string password)
+    {
+        // Tìm tài khoản dựa trên username và password
+        return _context.Accounts.FirstOrDefault(a => a.Username == username && a.Password == password);
+    }
 }

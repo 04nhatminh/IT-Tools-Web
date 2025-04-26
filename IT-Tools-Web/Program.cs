@@ -1,4 +1,4 @@
-using IT_Tools_Web.Business.Services;
+﻿using IT_Tools_Web.Business.Services;
 using IT_Tools_Web.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +11,19 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<ToolService>();
 
+// Add session service
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Thời gian session tồn tại
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+// Add IHttpContextAccessor
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
+app.UseSession();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
