@@ -2,6 +2,11 @@
 @inject IHttpContextAccessor HttpContextAccessor
 @inject ToolService ToolService
 
+@{
+    var userType = HttpContextAccessor.HttpContext.Session.GetString("UserType") ?? "anonymous";
+    var tools = ToolService.GetToolsForUser(userType);
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,7 +95,7 @@
                 
                 }
 
-                @foreach (var category in ToolService.GetEnabledTools().GroupBy(t => t.Category))
+                @foreach (var category in tools.GroupBy(t => t.Category))
                 {
                     <li>
                         <a class="btn w-100 text-start" data-bs-toggle="collapse" href="#@category.Key">

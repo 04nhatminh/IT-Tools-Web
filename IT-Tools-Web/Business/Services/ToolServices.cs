@@ -1,5 +1,7 @@
 ﻿using IT_Tools_Web.DataAccess;
 using IT_Tools_Web.DataAccess.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace IT_Tools_Web.Business.Services;
 
@@ -20,5 +22,19 @@ public class ToolService
     public List<Tool> GetEnabledTools()
     {
         return _context.Tools.Where(t => t.IsEnabled).ToList();
+    }
+
+    public List<Tool> GetToolsForUser(string userType)
+    {
+        if (userType == "admin" || userType == "premium")
+        {
+            // Admin và premium user có thể xem tất cả tools
+            return _context.Tools.Where(t => t.IsEnabled).ToList();
+        }
+        else
+        {
+            // User bình thường hoặc anonymous chỉ xem được tools không phải premium
+            return _context.Tools.Where(t => t.IsEnabled && !t.IsPremium).ToList();
+        }
     }
 }
